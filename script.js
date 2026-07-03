@@ -169,3 +169,31 @@ function atualizarProgresso(){
         `${respondidos} de ${total} itens respondidos`;
 
 }
+
+// ---------- Guardar Dados ----------
+
+function obterDadosFormulario(){
+
+    return {
+
+        motorista: document.getElementById("motorista").value,
+
+        placa: document.getElementById("placa").value,
+
+        prefixo: document.getElementById("prefixo").value,
+
+        destino: document.getElementById("destino").value,
+
+        data: document.getElementById("data").value,
+
+        hora: document.getElementById("hora").value,
+
+        observacoes: document.getElementById("observacoes").value,
+
+        respostas,
+
+        imagens
+
+    };
+
+}

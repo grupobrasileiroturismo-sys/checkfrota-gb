@@ -401,3 +401,67 @@ DESKTOP
 }
 
 }
+
+/*==================================
+FOTOS
+===================================*/
+
+.photo-card{
+
+    border:2px dashed #D0D7DE;
+
+    border-radius:16px;
+
+    min-height:220px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    background:#FAFAFA;
+
+}
+
+.photo-preview{
+
+    width:100%;
+
+    max-height:300px;
+
+    object-fit:cover;
+
+    border-radius:14px;
+
+}
+
+.photo-placeholder{
+
+    color:#777;
+
+    text-align:center;
+
+    padding:25px;
+
+    font-size:17px;
+
+}
+
+.photo-actions{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+}
+
+.photo-actions button{
+
+    flex:1;
+
+}
