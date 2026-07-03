@@ -1,0 +1,180 @@
+<style>
+
+/* =========================
+   RESET BASE
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 70%;
+    min-height: 70%;
+    font-family: 'Poppins', sans-serif;
+    background: #F5F7FA;
+
+    overflow-x: hidden;
+}
+
+/* =========================
+   HEADER (MAIS LIMPO)
+========================= */
+
+.header {
+    width: 100%;
+    padding: 10px;
+    background: #0F4C5C;
+    color: white;
+    text-align: center;
+    border-bottom: 4px solid #D4A017;
+}
+
+.header img {
+    width: 60px;
+}
+
+.header h1 {
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+.header p {
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+/* =========================
+   CONTAINER (CENTRALIZADO)
+========================= */
+
+.container {
+    width: 100%;
+    max-width: 420px;
+
+    margin: 0 auto;   /* 👈 ESSENCIAL */
+    padding: 10px;
+}
+
+/* =========================
+   CARD (MAIS ESTREITO + “ZOOM APP”)
+========================= */
+
+.card-section {
+    width: 92%;              /* 👈 mais estreito */
+    max-width: 420px;        /* 👈 estilo app real */
+    margin-bottom: 12px;
+
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.10);
+
+    border-left: 5px solid #0F4C5C;
+}
+
+/* =========================
+   CARD HEADER (MAIS “GRANDE APP”)
+========================= */
+
+.card-header {
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #fff;
+}
+
+/* =========================
+   CARD BODY (CONFORTÁVEL)
+========================= */
+
+.card-body {
+    display: none;
+    padding: 14px;
+    border-top: 1px solid #eee;
+}
+
+/* =========================
+   INPUTS (ESTILO APP)
+========================= */
+
+input,
+select,
+textarea {
+    width: 100%;
+    font-size: 17px;   /* 🔥 mais “zoom” */
+    padding: 14px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+/* =========================
+   BOTÃO FINAL (GRANDE APP)
+========================= */
+
+.btn-primary {
+    width: 92%;
+    max-width: 420px;
+
+    padding: 16px;
+    margin-top: 10px;
+
+    background: #0F4C5C;
+    color: white;
+
+    border: none;
+    border-radius: 12px;
+
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* =========================
+   PROGRESS BAR
+========================= */
+
+.progress-container {
+    width: 92%;
+    max-width: 420px;
+    height: 10px;
+
+    background: #e5e5e5;
+    border-radius: 20px;
+
+    margin: 12px auto;
+}
+
+.progress-bar {
+    height: 10px;
+    width: 0%;
+    background: linear-gradient(90deg, #0F4C5C, #D4A017);
+}
+
+/* =========================
+   MOBILE FINE TUNING
+========================= */
+
+@media (max-width: 768px) {
+
+    html, body {
+        font-size: 19px; /* 🔥 zoom geral maior no celular */
+    }
+
+    .card-section {
+        width: 94%;
+        max-width: 380px; /* ainda mais “app” */
+    }
+}
+
+</style>
