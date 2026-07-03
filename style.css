@@ -1,5 +1,5 @@
 /* =========================================
-   RESET + BASE
+   RESET BASE
 ========================================= */
 
 * {
@@ -12,16 +12,20 @@ html, body {
     width: 100%;
     min-height: 100%;
     font-family: 'Poppins', sans-serif;
-    background: #F5F7FA;
-    color: #1f1f1f;
+    background: #F4F6F9;
+    color: #1c1c1c;
 }
 
-/* container principal */
+
+/* =========================================
+   CONTAINER PRINCIPAL
+========================================= */
+
 .container {
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
-    padding: 15px;
+    padding: 12px;
 }
 
 
@@ -31,34 +35,36 @@ html, body {
 
 header {
     text-align: center;
-    padding: 20px 10px;
+    padding: 18px 10px;
 }
 
 header h1 {
     font-size: 20px;
     font-weight: 700;
+    color: #111;
 }
 
 header p {
-    font-size: 14px;
+    font-size: 13px;
     color: #666;
 }
 
 
 /* =========================================
-   CARDS
+   CARD PADRÃO
 ========================================= */
 
 .card {
     background: #fff;
-    border-radius: 14px;
-    padding: 15px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
 }
 
-.card h3 {
-    font-size: 16px;
+.card-title {
+    font-size: 15px;
+    font-weight: 600;
     margin-bottom: 10px;
 }
 
@@ -67,27 +73,53 @@ header p {
    INPUTS
 ========================================= */
 
-input, textarea, select {
+input,
+textarea,
+select {
     width: 100%;
     padding: 10px;
-    margin-top: 6px;
     border-radius: 8px;
     border: 1px solid #ddd;
     font-size: 14px;
+    outline: none;
+    margin-top: 6px;
 }
 
 textarea {
-    min-height: 80px;
+    min-height: 90px;
     resize: none;
 }
 
 
 /* =========================================
-   CHECKLIST
+   CHECKLIST - CATEGORIAS (CARDS)
+========================================= */
+
+.category-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.category-title {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+    border-left: 4px solid #1976D2;
+    padding-left: 8px;
+    text-transform: uppercase;
+}
+
+
+/* =========================================
+   ITENS DO CHECKLIST
 ========================================= */
 
 .check-item {
-    padding: 12px;
+    padding: 12px 0;
     border-bottom: 1px solid #eee;
 }
 
@@ -97,46 +129,48 @@ textarea {
     margin-bottom: 8px;
 }
 
+
+/* =========================================
+   BOTÕES STATUS
+========================================= */
+
 .status {
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
 }
 
-/* botões */
 .status button {
     flex: 1;
-    min-width: 90px;
-    padding: 8px;
+    min-width: 95px;
+    padding: 9px;
     border: none;
     border-radius: 8px;
     font-size: 12px;
     cursor: pointer;
-    background: #f2f2f2;
-    transition: 0.2s;
+    background: #f1f1f1;
+    transition: 0.2s ease;
 }
 
 .status button.active {
     transform: scale(1.03);
+    font-weight: 600;
 }
 
-/* cores */
+/* estados */
 .success.active {
-    background: #d1f7d6;
-    color: #0b7a2a;
-    font-weight: 600;
+    background: #DFF7E2;
+    color: #167A2F;
 }
 
 .danger.active {
-    background: #ffd6d6;
-    color: #b30000;
-    font-weight: 600;
+    background: #FFE1E1;
+    color: #B00020;
 }
 
 .na.active {
-    background: #e6e6e6;
+    background: #EAEAEA;
     color: #555;
-    font-weight: 600;
 }
 
 
@@ -144,26 +178,29 @@ textarea {
    PROGRESSO
 ========================================= */
 
-.progress-container {
+.progress-box {
+    margin-top: 10px;
+}
+
+.progress-bar-container {
     width: 100%;
-    background: #eee;
+    height: 10px;
+    background: #E6E6E6;
     border-radius: 20px;
     overflow: hidden;
-    height: 12px;
-    margin-top: 10px;
 }
 
 .progress-bar {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #4CAF50, #2E7D32);
-    transition: 0.3s;
+    background: linear-gradient(90deg, #4CAF50, #1B5E20);
+    transition: width 0.3s ease;
 }
 
 .progress-text {
-    font-size: 13px;
-    margin-top: 6px;
+    font-size: 12px;
     color: #555;
+    margin-top: 5px;
 }
 
 
@@ -172,39 +209,46 @@ textarea {
 ========================================= */
 
 .photo-item {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 
 .photo-title {
-    font-weight: 600;
     font-size: 14px;
+    font-weight: 600;
     margin-bottom: 8px;
 }
 
+/* caixa da foto */
 .photo-card {
-    border: 2px dashed #ccc;
+    border: 2px dashed #D0D7DE;
     border-radius: 12px;
-    min-height: 180px;
+    min-height: 170px;
+    background: #FAFAFA;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: #fafafa;
     overflow: hidden;
 }
 
+/* apenas texto "Foto" */
 .photo-placeholder {
-    text-align: center;
-    color: #777;
     font-size: 14px;
-    padding: 15px;
+    color: #777;
 }
 
+/* preview */
 .photo-preview {
     width: 100%;
     height: auto;
     object-fit: cover;
+    display: block;
 }
+
+
+/* =========================================
+   BOTÕES FOTOS
+========================================= */
 
 .photo-actions {
     display: flex;
@@ -215,22 +259,22 @@ textarea {
 .photo-actions button {
     flex: 1;
     padding: 10px;
-    border-radius: 8px;
     border: none;
+    border-radius: 8px;
     font-size: 12px;
     cursor: pointer;
 }
 
 .photo-actions button:nth-child(1) {
-    background: #e3f2fd;
+    background: #E3F2FD;
 }
 
 .photo-actions button:nth-child(2) {
-    background: #ede7f6;
+    background: #EDE7F6;
 }
 
 .photo-actions button:nth-child(3) {
-    background: #ffebee;
+    background: #FFEBEE;
 }
 
 
@@ -241,13 +285,13 @@ textarea {
 #btnFinalizar {
     width: 100%;
     padding: 14px;
+    margin-top: 18px;
     border: none;
     border-radius: 10px;
-    background: #1a73e8;
+    background: #1976D2;
     color: #fff;
     font-size: 15px;
     font-weight: 600;
-    margin-top: 20px;
     cursor: pointer;
 }
 
@@ -263,15 +307,14 @@ textarea {
 @media (min-width: 768px) {
 
     .container {
-        padding: 25px;
-    }
-
-    .status button {
-        font-size: 13px;
+        padding: 20px;
     }
 
     header h1 {
         font-size: 24px;
     }
 
+    .status button {
+        font-size: 13px;
+    }
 }
