@@ -43,10 +43,7 @@ const checklist = {
         "Freios",
         "Faróis",
         "Limpadores",
-        "Motor",
         "Ar-condicionado",
-        "Nível do óleo",
-        "Água do radiador"
 
     ],
 
@@ -55,6 +52,7 @@ const checklist = {
         "Extintor",
         "Triângulo",
         "Macaco",
+        "Martelo de emergência",
         "Chave de roda"
 
     ],
