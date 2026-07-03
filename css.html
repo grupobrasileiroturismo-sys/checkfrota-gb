@@ -1,105 +1,103 @@
-<style>
+/* ==========================================
+   CHECKLIST
+========================================== */
 
-body{
+.check-item{
 
-    background:#edf2f7;
-
-    font-family:
-    "Segoe UI",
-    sans-serif;
+    margin-bottom:24px;
 
 }
 
-.container-app{
+.check-item:last-child{
 
-    max-width:500px;
-
-    margin:auto;
-
-    padding:15px;
+    margin-bottom:0;
 
 }
 
-.header{
+.item-title{
 
-    text-align:center;
+    font-size:16px;
 
-    margin-top:20px;
+    font-weight:600;
 
-    margin-bottom:25px;
+    margin-bottom:10px;
 
-}
-
-#logo{
-
-    width:95px;
-
-    margin-bottom:12px;
+    color:var(--text);
 
 }
 
-.header h2{
+.status{
 
-    font-weight:700;
+    display:flex;
 
-    color:#0F4C5C;
+    gap:10px;
 
-}
-
-.header p{
-
-    color:#666;
+    flex-wrap:wrap;
 
 }
 
-.card{
+.status button{
 
-    border:none;
+    flex:1;
 
-    border-radius:16px;
+    min-width:150px;
+
+    border:2px solid #DADCE0;
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:12px;
+
+    font-weight:600;
+
+    transition:.25s;
 
 }
 
-.card-header{
+.status button:hover{
 
-    background:#0F4C5C;
+    transform:translateY(-2px);
+
+}
+
+.status button.active{
 
     color:white;
 
-    font-weight:600;
-
-    font-size:18px;
+    border:none;
 
 }
 
-.progress{
+.status button.success.active{
 
-    height:10px;
-
-    border-radius:20px;
+    background:#34A853;
 
 }
 
-.progress-bar{
+.status button.danger.active{
 
-    background:#D4A017;
-
-}
-
-.form-control{
-
-    height:48px;
-
-    border-radius:10px;
+    background:#EA4335;
 
 }
 
-label{
+.status button.na.active{
 
-    font-weight:600;
-
-    margin-bottom:6px;
+    background:#6C757D;
 
 }
 
-</style>
+.status button::before{
+
+    content:"";
+
+}
+
+.status button.active::before{
+
+    content:"✓ ";
+
+    font-weight:bold;
+
+}

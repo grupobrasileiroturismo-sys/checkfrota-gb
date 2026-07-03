@@ -95,13 +95,13 @@ Object.keys(checklist).forEach(secao => {
 
 // ---------- Criar Item ----------
 
-function criarItem(nome) {
+function criarItem(nome){
 
-    const div = document.createElement("div");
+    const item=document.createElement("div");
 
-    div.className = "item";
+    item.className="check-item";
 
-    div.innerHTML = `
+    item.innerHTML=`
 
         <div class="item-title">
 
@@ -125,7 +125,7 @@ function criarItem(nome) {
 
             <button class="na">
 
-                ⚪ N/A
+                ⚪ Não se aplica
 
             </button>
 
@@ -133,43 +133,41 @@ function criarItem(nome) {
 
     `;
 
-    const botoes =
-        div.querySelectorAll("button");
+    const botoes=item.querySelectorAll("button");
 
-    botoes.forEach(botao => {
+    botoes.forEach(botao=>{
 
-        botao.onclick = () => {
+        botao.addEventListener("click",()=>{
 
-            botoes.forEach(b =>
-                b.classList.remove("active"));
+            botoes.forEach(b=>b.classList.remove("active"));
 
             botao.classList.add("active");
 
             atualizarProgresso();
 
-        };
+        });
 
     });
 
-    return div;
+    return item;
 
 }
 
-
 // ---------- Barra ----------
 
-function atualizarProgresso() {
+function atualizarProgresso(){
 
-    const total =
-        document.querySelectorAll(".status").length;
+    const total=document.querySelectorAll(".status").length;
 
-    const respondidos =
-        document.querySelectorAll(".status .active").length;
+    const respondidos=document.querySelectorAll(".status .active").length;
 
-    const porcentagem =
-        Math.round((respondidos / total) * 100);
+    const percentual=Math.round((respondidos/total)*100);
 
-    document.getElementById("progressBar").style.width =
-        porcentagem + "%";
+    document.getElementById("progressBar").style.width=percentual+"%";
+
+    document.getElementById("percentual").textContent=percentual+"%";
+
+    document.getElementById("contadorItens").textContent=
+        `${respondidos} de ${total} itens respondidos`;
 
 }
