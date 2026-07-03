@@ -72,18 +72,24 @@ function criarChecklist(){
 
         if (!container) return;
 
-        // 🔥 título da categoria
-        const titulo = document.createElement("h3");
-        titulo.className = "section-title";
+        // 🔥 CRIA CARD DA CATEGORIA
+        const card = document.createElement("div");
+        card.className = "category-card";
+
+        // título da categoria
+        const titulo = document.createElement("div");
+        titulo.className = "category-title";
         titulo.innerText = secao.toUpperCase();
 
-        container.appendChild(titulo);
+        card.appendChild(titulo);
 
+        // itens da categoria
         CHECKLIST[secao].forEach(item => {
-
-            container.appendChild(criarItem(item));
-
+            card.appendChild(criarItem(item));
         });
+
+        // adiciona o card dentro do container da seção
+        container.appendChild(card);
 
     });
 

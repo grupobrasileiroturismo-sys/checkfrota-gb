@@ -72,7 +72,7 @@ function criarFotos() {
 
                     <br><br>
 
-                    Foto
+                    Foto  
 
                 </div>
 
