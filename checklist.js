@@ -72,6 +72,13 @@ function criarChecklist(){
 
         if (!container) return;
 
+        // 🔥 título da categoria
+        const titulo = document.createElement("h3");
+        titulo.className = "section-title";
+        titulo.innerText = secao.toUpperCase();
+
+        container.appendChild(titulo);
+
         CHECKLIST[secao].forEach(item => {
 
             container.appendChild(criarItem(item));
