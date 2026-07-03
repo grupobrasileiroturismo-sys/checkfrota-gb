@@ -1,199 +1,81 @@
-// =====================================
-// CHECKFROTA GB
+// =============================================
 // SCRIPT.JS
-// =====================================
+// INICIALIZAÇÃO DO SISTEMA
+// =============================================
 
-// ---------- Data e Hora ----------
+window.addEventListener("DOMContentLoaded", () => {
 
-function atualizarDataHora() {
-
-    const agora = new Date();
-
-    document.getElementById("data").value =
-        agora.toLocaleDateString("pt-BR");
-
-    document.getElementById("hora").value =
-        agora.toLocaleTimeString("pt-BR", {
-            hour: "2-digit",
-            minute: "2-digit"
-        });
-
-}
-
-setInterval(atualizarDataHora, 1000);
-atualizarDataHora();
-
-
-// ---------- Estrutura do Checklist ----------
-
-const checklist = {
-
-    documentacao: [
-
-        "CRLV",
-        "Certificado de Vistoria",
-        "Documento ANTT",
-        "Documento Cronotacógrafo"
-
-    ],
-
-    mecanica: [
-
-        "Pneus",
-        "Freios",
-        "Faróis",
-        "Limpadores",
-        "Ar-condicionado"
-
-    ],
-
-    seguranca: [
-
-        "Extintor",
-        "Triângulo",
-        "Macaco",
-        "Martelo de emergência",
-        "Chave de roda"
-
-    ],
-
-    limpeza: [
-
-        "Limpeza Interna",
-        "Limpeza Externa"
-
-    ],
-
-    conforto: [
-
-        "Água Mineral"
-
-    ]
-
-};
-
-
-// ---------- Gerar Itens ----------
-
-Object.keys(checklist).forEach(secao => {
-
-    const container =
-        document.getElementById(secao);
-
-    checklist[secao].forEach(item => {
-
-        container.appendChild(
-            criarItem(item)
-        );
-
-    });
+    inicializarAplicacao();
 
 });
 
 
-// ---------- Criar Item ----------
+// =============================================
+// INICIALIZAÇÃO GERAL
+// =============================================
 
-function criarItem(nome){
+function inicializarAplicacao() {
 
-    const item=document.createElement("div");
+    // Inicializa data e hora (se existir no projeto)
+    iniciarDataHora();
 
-    item.className="check-item";
+    // Inicializa checklist
+    if (typeof criarChecklist === "function") {
+        criarChecklist();
+    }
 
-    item.innerHTML=`
+    // Inicializa fotos
+    if (typeof criarFotos === "function") {
+        criarFotos();
+    }
 
-        <div class="item-title">
+    // Eventos globais
+    configurarEventosGlobais();
 
-            ${nome}
+}
 
-        </div>
 
-        <div class="status">
+// =============================================
+// EVENTOS GLOBAIS
+// =============================================
 
-            <button class="success">
+function configurarEventosGlobais() {
 
-                🟢 Conforme
+    const btnFinalizar = document.getElementById("btnFinalizar");
 
-            </button>
+    if (btnFinalizar) {
+        btnFinalizar.addEventListener("click", () => {
 
-            <button class="danger">
-
-                🔴 Não Conforme
-
-            </button>
-
-            <button class="na">
-
-                ⚪ Não se aplica
-
-            </button>
-
-        </div>
-
-    `;
-
-    const botoes=item.querySelectorAll("button");
-
-    botoes.forEach(botao=>{
-
-        botao.addEventListener("click",()=>{
-
-            botoes.forEach(b=>b.classList.remove("active"));
-
-            botao.classList.add("active");
-
-            atualizarProgresso();
+            if (typeof gerarPDF === "function") {
+                gerarPDF();
+            }
 
         });
+    }
 
+}
+
+
+// =============================================
+// DATA E HORA (SE USAR NO PROJETO)
+// =============================================
+
+function iniciarDataHora() {
+
+    const dataEl = document.getElementById("data");
+    const horaEl = document.getElementById("hora");
+
+    if (!dataEl || !horaEl) return;
+
+    const agora = new Date();
+
+    const data = agora.toLocaleDateString("pt-BR");
+    const hora = agora.toLocaleTimeString("pt-BR", {
+        hour: "2-digit",
+        minute: "2-digit"
     });
 
-    return item;
-
-}
-
-// ---------- Barra ----------
-
-function atualizarProgresso(){
-
-    const total=document.querySelectorAll(".status").length;
-
-    const respondidos=document.querySelectorAll(".status .active").length;
-
-    const percentual=Math.round((respondidos/total)*100);
-
-    document.getElementById("progressBar").style.width=percentual+"%";
-
-    document.getElementById("percentual").textContent=percentual+"%";
-
-    document.getElementById("contadorItens").textContent=
-        `${respondidos} de ${total} itens respondidos`;
-
-}
-
-// ---------- Guardar Dados ----------
-
-function obterDadosFormulario(){
-
-    return {
-
-        motorista: document.getElementById("motorista").value,
-
-        placa: document.getElementById("placa").value,
-
-        prefixo: document.getElementById("prefixo").value,
-
-        destino: document.getElementById("destino").value,
-
-        data: document.getElementById("data").value,
-
-        hora: document.getElementById("hora").value,
-
-        observacoes: document.getElementById("observacoes").value,
-
-        respostas,
-
-        imagens
-
-    };
+    dataEl.value = data;
+    horaEl.value = hora;
 
 }

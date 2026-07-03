@@ -7,6 +7,7 @@
 // =============================================
 
 const respostas = {};
+
 const CHECKLIST = {
 
     documentacao: [
