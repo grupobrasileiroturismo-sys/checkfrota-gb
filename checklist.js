@@ -2,11 +2,10 @@
 // CHECKLIST.JS
 // =============================================
 
-// =============================================
-// RESPOSTAS DA INSPEÇÃO
-// =============================================
 
-const respostas = {};
+// =============================================
+// ESTRUTURA DO CHECKLIST
+// =============================================
 
 const CHECKLIST = {
 
@@ -32,8 +31,8 @@ const CHECKLIST = {
     seguranca: [
 
         "Extintor",
-        "Triângulo",
         "Cinto de Segurança",
+        "Triângulo",
         "Martelo de emergência"
 
     ],
@@ -54,23 +53,28 @@ const CHECKLIST = {
 };
 
 
-// ================================
-// CRIA O CHECKLIST
-// ================================
+// =============================================
+// RESPOSTAS (GLOBAL PARA PDF / BACKEND)
+// =============================================
+
+window.respostas = {};
+
+
+// =============================================
+// CRIAR CHECKLIST NA TELA
+// =============================================
 
 function criarChecklist(){
 
-    Object.keys(CHECKLIST).forEach(secao=>{
+    Object.keys(CHECKLIST).forEach(secao => {
 
-        const container=document.getElementById(secao);
+        const container = document.getElementById(secao);
 
-        CHECKLIST[secao].forEach(item=>{
+        if (!container) return;
 
-            container.appendChild(
+        CHECKLIST[secao].forEach(item => {
 
-                criarItem(item)
-
-            );
+            container.appendChild(criarItem(item));
 
         });
 
@@ -79,13 +83,13 @@ function criarChecklist(){
 }
 
 
-// ================================
-// CRIA UM ITEM
-// ================================
+// =============================================
+// CRIAR ITEM INDIVIDUAL
+// =============================================
 
 function criarItem(nome){
 
-    respostas[nome] = "";
+    window.respostas[nome] = ""; // inicializa resposta
 
     const div = document.createElement("div");
 
@@ -94,35 +98,21 @@ function criarItem(nome){
     div.innerHTML = `
 
         <div class="item-title">
-
             ${nome}
-
         </div>
 
         <div class="status">
 
-            <button
-                class="success"
-                data-status="Conforme">
-
+            <button class="success" data-status="Conforme">
                 🟢 Conforme
-
             </button>
 
-            <button
-                class="danger"
-                data-status="Não Conforme">
-
+            <button class="danger" data-status="Não Conforme">
                 🔴 Não Conforme
-
             </button>
 
-            <button
-                class="na"
-                data-status="Não se aplica">
-
+            <button class="na" data-status="Não se aplica">
                 ⚪ Não se aplica
-
             </button>
 
         </div>
@@ -131,15 +121,18 @@ function criarItem(nome){
 
     const botoes = div.querySelectorAll("button");
 
-    botoes.forEach(botao=>{
+    botoes.forEach(botao => {
 
-        botao.addEventListener("click",()=>{
+        botao.addEventListener("click", () => {
 
-            botoes.forEach(b=>b.classList.remove("active"));
+            // remove seleção anterior
+            botoes.forEach(b => b.classList.remove("active"));
 
+            // marca atual
             botao.classList.add("active");
 
-            respostas[nome] = botao.dataset.status;
+            // salva resposta global (IMPORTANTE PARA PDF)
+            window.respostas[nome] = botao.dataset.status;
 
             atualizarProgresso();
 
@@ -151,28 +144,25 @@ function criarItem(nome){
 
 }
 
-// ================================
-// PROGRESSO
-// ================================
+
+// =============================================
+// PROGRESSO DO CHECKLIST
+// =============================================
 
 function atualizarProgresso(){
 
-    const total=document.querySelectorAll(".status").length;
+    const total = document.querySelectorAll(".status").length;
 
-    const respondidos=document.querySelectorAll(".status .active").length;
+    const respondidos = document.querySelectorAll(".status .active").length;
 
-    const percentual=Math.round((respondidos/total)*100);
+    const percentual = Math.round((respondidos / total) * 100);
 
-    document.getElementById("progressBar").style.width=
+    const barra = document.getElementById("progressBar");
+    const texto = document.getElementById("percentual");
+    const contador = document.getElementById("contadorItens");
 
-        percentual+"%";
-
-    document.getElementById("percentual").textContent=
-
-        percentual+"%";
-
-    document.getElementById("contadorItens").textContent=
-
-        `${respondidos} de ${total} itens respondidos`;
+    if (barra) barra.style.width = percentual + "%";
+    if (texto) texto.textContent = percentual + "%";
+    if (contador) contador.textContent = `${respondidos} de ${total} itens respondidos`;
 
 }

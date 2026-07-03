@@ -1,467 +1,277 @@
-/* ===========================
-   CHECKFROTA GB
-   STYLE.CSS
-=========================== */
+/* =========================================
+   RESET + BASE
+========================================= */
 
-:root{
-
-    --primary:#0F4C81;
-    --secondary:#F4B400;
-    --background:#F1F3F4;
-    --card:#FFFFFF;
-    --text:#202124;
-    --subtitle:#5F6368;
-    --border:#DADCE0;
-
-    --success:#34A853;
-    --danger:#EA4335;
-    --neutral:#9AA0A6;
-
-    --radius:16px;
-
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-*{
-
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-
+html, body {
+    width: 100%;
+    min-height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background: #F5F7FA;
+    color: #1f1f1f;
 }
 
-html{
-
-    scroll-behavior:smooth;
-
+/* container principal */
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 15px;
 }
 
-body{
 
-    background:var(--background);
+/* =========================================
+   HEADER
+========================================= */
 
-    font-family:"Inter",sans-serif;
-
-    color:var(--text);
-
+header {
+    text-align: center;
+    padding: 20px 10px;
 }
 
-/*=========================
-APP
-=========================*/
-
-.container-app{
-
-    width:100%;
-    max-width:720px;
-
-    margin:auto;
-
-    padding:18px;
-
+header h1 {
+    font-size: 20px;
+    font-weight: 700;
 }
 
-/*=========================
-HEADER
-=========================*/
-
-.app-header{
-
-    text-align:center;
-
-    margin-bottom:28px;
-
+header p {
+    font-size: 14px;
+    color: #666;
 }
 
-.logo{
 
-    width:120px;
+/* =========================================
+   CARDS
+========================================= */
 
-    margin-bottom:14px;
-
+.card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
-.app-header h1{
-
-    font-size:2rem;
-
-    font-weight:700;
-
-    color:var(--primary);
-
+.card h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
 }
 
-.app-header p{
 
-    color:var(--subtitle);
+/* =========================================
+   INPUTS
+========================================= */
 
-    font-size:1rem;
-
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
 }
 
-/*=========================
-PROGRESS
-=========================*/
-
-.progress{
-
-    height:12px;
-
-    border-radius:20px;
-
-    background:#E4E7EB;
-
-    margin-bottom:25px;
-
+textarea {
+    min-height: 80px;
+    resize: none;
 }
 
-.progress-bar{
 
-    width:0%;
+/* =========================================
+   CHECKLIST
+========================================= */
 
-    background:var(--secondary);
-
-    transition:.4s;
-
+.check-item {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
 }
 
-/*=========================
-CARDS
-=========================*/
-
-.card{
-
-    border:none;
-
-    border-radius:var(--radius);
-
-    margin-bottom:18px;
-
-    box-shadow:
-    0 4px 18px rgba(0,0,0,.08);
-
+.item-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 8px;
 }
 
-.card-body{
-
-    padding:24px;
-
+.status {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
 }
 
-.card h3{
-
-    color:var(--primary);
-
-    margin-bottom:22px;
-
-    font-size:1.25rem;
-
-    font-weight:700;
-
+/* botões */
+.status button {
+    flex: 1;
+    min-width: 90px;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    background: #f2f2f2;
+    transition: 0.2s;
 }
 
-/*=========================
-LABEL
-=========================*/
-
-label{
-
-    font-weight:600;
-
-    margin-bottom:6px;
-
+.status button.active {
+    transform: scale(1.03);
 }
 
-/*=========================
-INPUT
-=========================*/
-
-.form-control{
-
-    height:52px;
-
-    border-radius:12px;
-
-    border:1px solid var(--border);
-
-    transition:.2s;
-
+/* cores */
+.success.active {
+    background: #d1f7d6;
+    color: #0b7a2a;
+    font-weight: 600;
 }
 
-.form-control:focus{
-
-    border-color:var(--primary);
-
-    box-shadow:0 0 0 .20rem rgba(15,76,129,.15);
-
+.danger.active {
+    background: #ffd6d6;
+    color: #b30000;
+    font-weight: 600;
 }
 
-/*=========================
-BOTÃO
-=========================*/
-
-.btn-primary{
-
-    background:var(--primary);
-
-    border:none;
-
-    height:56px;
-
-    border-radius:14px;
-
-    font-weight:700;
-
-    font-size:18px;
-
+.na.active {
+    background: #e6e6e6;
+    color: #555;
+    font-weight: 600;
 }
 
-.btn-primary:hover{
 
-    background:#093864;
+/* =========================================
+   PROGRESSO
+========================================= */
 
+.progress-container {
+    width: 100%;
+    background: #eee;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 12px;
+    margin-top: 10px;
 }
 
-/*=========================
-CHECKLIST
-=========================*/
-
-.item{
-
-    margin-bottom:28px;
-
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #4CAF50, #2E7D32);
+    transition: 0.3s;
 }
 
-.item-title{
-
-    font-weight:600;
-
-    margin-bottom:12px;
-
+.progress-text {
+    font-size: 13px;
+    margin-top: 6px;
+    color: #555;
 }
 
-.status{
 
-    display:flex;
+/* =========================================
+   FOTOS
+========================================= */
 
-    gap:10px;
-
-    flex-wrap:wrap;
-
+.photo-item {
+    margin-bottom: 15px;
 }
 
-.status button{
-
-    flex:1;
-
-    min-width:100px;
-
-    border:none;
-
-    border-radius:12px;
-
-    padding:12px;
-
-    background:#ECEFF1;
-
-    transition:.25s;
-
-    font-weight:600;
-
+.photo-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 8px;
 }
 
-.status button:hover{
-
-    transform:translateY(-2px);
-
+.photo-card {
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #fafafa;
+    overflow: hidden;
 }
 
-.status button.success.active{
-
-    background:#D7F5E2;
-
-    color:#0B7A35;
-
+.photo-placeholder {
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    padding: 15px;
 }
 
-.status button.danger.active{
-
-    background:#FAD7D5;
-
-    color:#B3261E;
-
+.photo-preview {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
-.status button.na.active{
-
-    background:#ECEFF1;
-
-    color:#555;
-
+.photo-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
 }
 
-/*=========================
-FOTOS
-=========================*/
-
-.photo-card{
-
-    border:2px dashed #C9CDD1;
-
-    border-radius:14px;
-
-    padding:18px;
-
-    text-align:center;
-
-    margin-bottom:18px;
-
+.photo-actions button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
 }
 
-.photo-card img{
-
-    width:100%;
-
-    border-radius:12px;
-
-    margin-top:15px;
-
+.photo-actions button:nth-child(1) {
+    background: #e3f2fd;
 }
 
-/*=========================
-OBSERVAÇÃO
-=========================*/
-
-textarea{
-
-    resize:none;
-
+.photo-actions button:nth-child(2) {
+    background: #ede7f6;
 }
 
-/*=========================
-MOBILE
-=========================*/
-
-@media(max-width:768px){
-
-.container-app{
-
-    padding:14px;
-
+.photo-actions button:nth-child(3) {
+    background: #ffebee;
 }
 
-.logo{
 
-    width:95px;
+/* =========================================
+   BOTÃO FINALIZAR
+========================================= */
 
+#btnFinalizar {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #1a73e8;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 20px;
+    cursor: pointer;
 }
 
-.app-header h1{
-
-    font-size:1.6rem;
-
+#btnFinalizar:active {
+    transform: scale(0.98);
 }
 
-.card-body{
 
-    padding:18px;
+/* =========================================
+   RESPONSIVO
+========================================= */
 
-}
+@media (min-width: 768px) {
 
-.status{
+    .container {
+        padding: 25px;
+    }
 
-    flex-direction:column;
+    .status button {
+        font-size: 13px;
+    }
 
-}
-
-.status button{
-
-    width:100%;
-
-}
-
-.btn-primary{
-
-    font-size:17px;
-
-}
-
-}
-
-/*=========================
-DESKTOP
-=========================*/
-
-@media(min-width:769px){
-
-.container-app{
-
-    margin-top:30px;
-    margin-bottom:30px;
-
-}
-
-}
-
-/*==================================
-FOTOS
-===================================*/
-
-.photo-card{
-
-    border:2px dashed #D0D7DE;
-
-    border-radius:16px;
-
-    min-height:220px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    flex-direction:column;
-
-    background:#FAFAFA;
-
-}
-
-.photo-preview{
-
-    width:100%;
-
-    max-height:300px;
-
-    object-fit:cover;
-
-    border-radius:14px;
-
-}
-
-.photo-placeholder{
-
-    color:#777;
-
-    text-align:center;
-
-    padding:25px;
-
-    font-size:17px;
-
-}
-
-.photo-actions{
-
-    display:flex;
-
-    gap:10px;
-
-    flex-wrap:wrap;
-
-}
-
-.photo-actions button{
-
-    flex:1;
+    header h1 {
+        font-size: 24px;
+    }
 
 }

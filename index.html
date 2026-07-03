@@ -1,316 +1,132 @@
 <!DOCTYPE html>
-
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>CheckFrota GB</title>
 
-    <!-- Bootstrap -->
-
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 
     <!-- Fonte -->
-
-    <link rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <link
-        rel="stylesheet"
-        href="style.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="container-app">
+<div class="container">
 
-<!-- ====================================== -->
-<!-- HEADER -->
-<!-- ====================================== -->
+    <!-- =====================================
+         CABEÇALHO
+    ====================================== -->
 
-<header class="app-header">
+    <header>
+        <h1>CheckFrota GB</h1>
+        <p>Relatório de Inspeção Pré-Operacional</p>
+    </header>
 
-    <img
-        src="assets/logo.png"
-        class="logo"
-        alt="Grupo Brasileiro">
 
-    <h1>
+    <!-- =====================================
+         DADOS DO MOTORISTA / VEÍCULO
+    ====================================== -->
 
-        CheckFrota GB
+    <div class="card">
 
-    </h1>
+        <div class="card-title">Dados da Inspeção</div>
 
-    <p>
+        <input type="text" id="txtMotorista" placeholder="Motorista">
 
-        Relatório de Inspeção Pré-Operacional
+        <input type="text" id="txtPlaca" placeholder="Placa">
 
-    </p>
+        <input type="text" id="txtPrefixo" placeholder="Prefixo">
 
-</header>
+        <input type="text" id="txtDestino" placeholder="Destino">
 
-<!-- ====================================== -->
-<!-- PROGRESSO -->
-<!-- ====================================== -->
+        <input type="date" id="data">
 
-<section class="card shadow-sm mb-4">
+        <input type="time" id="hora">
 
-<div class="card-body">
+    </div>
 
-<div class="d-flex justify-content-between align-items-center mb-2">
 
-<strong>
+    <!-- =====================================
+         CHECKLIST
+    ====================================== -->
 
-Progresso
+    <div class="card">
 
-</strong>
+        <div class="card-title">Checklist</div>
 
-<span id="percentual">
+        <div id="documentacao"></div>
+        <div id="mecanica"></div>
+        <div id="seguranca"></div>
+        <div id="limpeza"></div>
+        <div id="conforto"></div>
 
-0%
+        <!-- progresso -->
+        <div class="progress-box">
 
-</span>
+            <div class="progress-bar-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
 
-</div>
+            <div class="progress-text">
+                <span id="percentual">0%</span>
+                <span id="contadorItens">0 de 0 itens</span>
+            </div>
 
-<div class="progress">
+        </div>
 
-<div
-    class="progress-bar"
-    id="progressBar">
+    </div>
 
-</div>
 
-</div>
+    <!-- =====================================
+         OBSERVAÇÕES
+    ====================================== -->
 
-<div
-    id="contadorItens"
-    class="text-muted mt-2">
+    <div class="card">
 
-0 de 0 itens respondidos
+        <div class="card-title">Observações</div>
 
-</div>
+        <textarea id="txtObservacoes" placeholder="Digite observações aqui..."></textarea>
 
-</div>
+    </div>
 
-</section>
 
-<!-- ====================================== -->
-<!-- IDENTIFICAÇÃO -->
-<!-- ====================================== -->
+    <!-- =====================================
+         FOTOS
+    ====================================== -->
 
-<section class="card shadow-sm mb-4">
+    <div class="card">
 
-<div class="card-body">
+        <div class="card-title">Fotos da Inspeção</div>
 
-<h3>
+        <div id="photoContainer"></div>
 
-🚍 Identificação
+    </div>
 
-</h3>
 
-<div class="mb-3">
+    <!-- =====================================
+         BOTÃO FINALIZAR
+    ====================================== -->
 
-<label class="form-label">
-
-Motorista *
-
-</label>
-
-<input
-    id="motorista"
-    class="form-control"
-    required>
-
-</div>
-
-<div class="row">
-
-<div class="col-6">
-
-<label class="form-label">
-
-Placa *
-
-</label>
-
-<input
-    id="placa"
-    class="form-control">
+    <button id="btnFinalizar">
+        Finalizar Inspeção
+    </button>
 
 </div>
 
-<div class="col-6">
 
-<label class="form-label">
+<!-- =========================================
+     SCRIPTS
+========================================= -->
 
-Prefixo *
+<script src="checklist.js"></script>
+<script src="photos.js"></script>
+<script src="pdf.js"></script>
+<script src="script.js"></script>
 
-</label>
-
-<input
-    id="prefixo"
-    class="form-control">
-
-</div>
-
-</div>
-
-<div class="mt-3">
-
-<label class="form-label">
-
-Destino
-
-</label>
-
-<input
-    id="destino"
-    class="form-control">
-
-</div>
-
-<div class="row mt-3">
-
-<div class="col-6">
-
-<label>
-
-Data
-
-</label>
-
-<input
-    id="data"
-    class="form-control"
-    readonly>
-
-</div>
-
-<div class="col-6">
-
-<label>
-
-Hora
-
-</label>
-
-<input
-    id="hora"
-    class="form-control"
-    readonly>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- DOCUMENTAÇÃO -->
-
-<section class="card shadow-sm mb-4">
-
-<div class="card-body">
-
-<h3>
-
-📄 Documentação
-
-</h3>
-
-<div id="documentacao"></div>
-
-</div>
-
-</section>
-
-<!-- MECÂNICA -->
-
-<section class="card shadow-sm mb-4">
-
-<div class="card-body">
-
-<h3>
-
-🔧 Mecânica
-
-</h3>
-
-<div id="mecanica"></div>
-
-</div>
-
-</section>
-
-<!-- SEGURANÇA -->
-
-<section class="card shadow-sm mb-4">
-
-<div class="card-body">
-
-<h3>
-
-🛡 Segurança
-
-</h3>
-
-<div id="seguranca"></div>
-
-</div>
-
-</section>
-
-<!-- LIMPEZA -->
-
-<section class="card shadow-sm mb-4">
-
-<div class="card-body">
-
-<h3>
-
-🧹 Limpeza
-
-</h3>
-
-<div id="limpeza"></div>
-
-</div>
-
-</section>
-
-<!-- CONFORTO -->
-
-<section class="card shadow-sm mb-4">
-
-<div class="card-body">
-
-<h3>
-
-💧 Conforto
-
-</h3>
-
-<div id="conforto"></div>
-
-</div>
-
-</section>
+</body>
+</html>
