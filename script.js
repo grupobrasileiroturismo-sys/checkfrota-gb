@@ -43,7 +43,7 @@ const checklist = {
         "Freios",
         "Faróis",
         "Limpadores",
-        "Ar-condicionado",
+        "Ar-condicionado"
 
     ],
 
