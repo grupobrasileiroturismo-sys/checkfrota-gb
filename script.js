@@ -69,13 +69,11 @@ function iniciarDataHora() {
 
     const agora = new Date();
 
-    const data = agora.toLocaleDateString("pt-BR");
-    const hora = agora.toLocaleTimeString("pt-BR", {
-        hour: "2-digit",
-        minute: "2-digit"
-    });
+    const dataFormatada = agora.toISOString().split("T")[0]; // YYYY-MM-DD
 
-    dataEl.value = data;
-    horaEl.value = hora;
+    const horaFormatada = agora.toTimeString().slice(0,5); // HH:MM
+
+    dataEl.value = dataFormatada;
+    horaEl.value = horaFormatada;
 
 }

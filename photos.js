@@ -22,7 +22,7 @@ const FOTOS = [
     },
     {
         id: "avaria",
-        titulo: "Foto da Avaria",
+        titulo: "Avaria (Se houver)",
         obrigatoria: false
     }
 ];
@@ -72,7 +72,7 @@ function criarFotos() {
 
                     <br><br>
 
-                    Toque para adicionar uma foto
+                    Foto
 
                 </div>
 
