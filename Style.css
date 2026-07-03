@@ -1,0 +1,403 @@
+/* ===========================
+   CHECKFROTA GB
+   STYLE.CSS
+=========================== */
+
+:root{
+
+    --primary:#0F4C81;
+    --secondary:#F4B400;
+    --background:#F1F3F4;
+    --card:#FFFFFF;
+    --text:#202124;
+    --subtitle:#5F6368;
+    --border:#DADCE0;
+
+    --success:#34A853;
+    --danger:#EA4335;
+    --neutral:#9AA0A6;
+
+    --radius:16px;
+
+}
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    background:var(--background);
+
+    font-family:"Inter",sans-serif;
+
+    color:var(--text);
+
+}
+
+/*=========================
+APP
+=========================*/
+
+.container-app{
+
+    width:100%;
+    max-width:720px;
+
+    margin:auto;
+
+    padding:18px;
+
+}
+
+/*=========================
+HEADER
+=========================*/
+
+.app-header{
+
+    text-align:center;
+
+    margin-bottom:28px;
+
+}
+
+.logo{
+
+    width:120px;
+
+    margin-bottom:14px;
+
+}
+
+.app-header h1{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+}
+
+.app-header p{
+
+    color:var(--subtitle);
+
+    font-size:1rem;
+
+}
+
+/*=========================
+PROGRESS
+=========================*/
+
+.progress{
+
+    height:12px;
+
+    border-radius:20px;
+
+    background:#E4E7EB;
+
+    margin-bottom:25px;
+
+}
+
+.progress-bar{
+
+    width:0%;
+
+    background:var(--secondary);
+
+    transition:.4s;
+
+}
+
+/*=========================
+CARDS
+=========================*/
+
+.card{
+
+    border:none;
+
+    border-radius:var(--radius);
+
+    margin-bottom:18px;
+
+    box-shadow:
+    0 4px 18px rgba(0,0,0,.08);
+
+}
+
+.card-body{
+
+    padding:24px;
+
+}
+
+.card h3{
+
+    color:var(--primary);
+
+    margin-bottom:22px;
+
+    font-size:1.25rem;
+
+    font-weight:700;
+
+}
+
+/*=========================
+LABEL
+=========================*/
+
+label{
+
+    font-weight:600;
+
+    margin-bottom:6px;
+
+}
+
+/*=========================
+INPUT
+=========================*/
+
+.form-control{
+
+    height:52px;
+
+    border-radius:12px;
+
+    border:1px solid var(--border);
+
+    transition:.2s;
+
+}
+
+.form-control:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 .20rem rgba(15,76,129,.15);
+
+}
+
+/*=========================
+BOTÃO
+=========================*/
+
+.btn-primary{
+
+    background:var(--primary);
+
+    border:none;
+
+    height:56px;
+
+    border-radius:14px;
+
+    font-weight:700;
+
+    font-size:18px;
+
+}
+
+.btn-primary:hover{
+
+    background:#093864;
+
+}
+
+/*=========================
+CHECKLIST
+=========================*/
+
+.item{
+
+    margin-bottom:28px;
+
+}
+
+.item-title{
+
+    font-weight:600;
+
+    margin-bottom:12px;
+
+}
+
+.status{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+}
+
+.status button{
+
+    flex:1;
+
+    min-width:100px;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:12px;
+
+    background:#ECEFF1;
+
+    transition:.25s;
+
+    font-weight:600;
+
+}
+
+.status button:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.status button.success.active{
+
+    background:#D7F5E2;
+
+    color:#0B7A35;
+
+}
+
+.status button.danger.active{
+
+    background:#FAD7D5;
+
+    color:#B3261E;
+
+}
+
+.status button.na.active{
+
+    background:#ECEFF1;
+
+    color:#555;
+
+}
+
+/*=========================
+FOTOS
+=========================*/
+
+.photo-card{
+
+    border:2px dashed #C9CDD1;
+
+    border-radius:14px;
+
+    padding:18px;
+
+    text-align:center;
+
+    margin-bottom:18px;
+
+}
+
+.photo-card img{
+
+    width:100%;
+
+    border-radius:12px;
+
+    margin-top:15px;
+
+}
+
+/*=========================
+OBSERVAÇÃO
+=========================*/
+
+textarea{
+
+    resize:none;
+
+}
+
+/*=========================
+MOBILE
+=========================*/
+
+@media(max-width:768px){
+
+.container-app{
+
+    padding:14px;
+
+}
+
+.logo{
+
+    width:95px;
+
+}
+
+.app-header h1{
+
+    font-size:1.6rem;
+
+}
+
+.card-body{
+
+    padding:18px;
+
+}
+
+.status{
+
+    flex-direction:column;
+
+}
+
+.status button{
+
+    width:100%;
+
+}
+
+.btn-primary{
+
+    font-size:17px;
+
+}
+
+}
+
+/*=========================
+DESKTOP
+=========================*/
+
+@media(min-width:769px){
+
+.container-app{
+
+    margin-top:30px;
+    margin-bottom:30px;
+
+}
+
+}

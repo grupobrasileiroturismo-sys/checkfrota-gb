@@ -1,275 +1,362 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <base target="_top">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<html lang="pt-BR">
 
-  <?!= include('CSS'); ?>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>CheckFrota GB</title>
+
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Fonte -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
-<div class="header">
-  <img src="https://via.placeholder.com/120x60?text=LOGO" alt="Logo">
-  <h1>CHECKFROTA GB</h1>
-  <p>Relatório de Inspeção Pré-Operacional</p>
+<div class="container-app">
+
+    <!-- CABEÇALHO -->
+
+    <header class="app-header">
+
+        <img
+            src="assets/logo.png"
+            alt="Grupo Brasileiro"
+            class="logo">
+
+        <h1>
+
+            CheckFrota GB
+
+        </h1>
+
+        <p>
+
+            Relatório de Inspeção Pré-Operacional
+
+        </p>
+
+    </header>
+
+
+    <!-- BARRA -->
+
+    <div class="progress sticky-top mb-4">
+
+        <div
+            id="progressBar"
+            class="progress-bar">
+
+        </div>
+
+    </div>
+
+
+    <!-- IDENTIFICAÇÃO -->
+
+    <section class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <h3>
+
+                🚍 Identificação
+
+            </h3>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+
+                    Motorista
+
+                </label>
+
+                <input
+                    id="motorista"
+                    type="text"
+                    class="form-control">
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+
+                    Ordem de Serviço
+
+                </label>
+
+                <input
+                    id="os"
+                    type="text"
+                    class="form-control">
+
+            </div>
+
+            <div class="row">
+
+                <div class="col">
+
+                    <label class="form-label">
+
+                        Placa
+
+                    </label>
+
+                    <input
+                        id="placa"
+                        class="form-control">
+
+                </div>
+
+                <div class="col">
+
+                    <label class="form-label">
+
+                        Prefixo
+
+                    </label>
+
+                    <input
+                        id="prefixo"
+                        class="form-control">
+
+                </div>
+
+            </div>
+
+            <div class="mt-3">
+
+                <label class="form-label">
+
+                    Destino
+
+                </label>
+
+                <input
+                    id="destino"
+                    class="form-control">
+
+            </div>
+
+            <div class="row mt-3">
+
+                <div class="col">
+
+                    <label class="form-label">
+
+                        Data
+
+                    </label>
+
+                    <input
+                        id="data"
+                        class="form-control"
+                        readonly>
+
+                </div>
+
+                <div class="col">
+
+                    <label class="form-label">
+
+                        Hora
+
+                    </label>
+
+                    <input
+                        id="hora"
+                        class="form-control"
+                        readonly>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- DOCUMENTAÇÃO -->
+
+    <section class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <h3>
+
+                📄 Documentação
+
+            </h3>
+
+            <div id="documentacao">
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- MECÂNICA -->
+
+    <section class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <h3>
+
+                🔧 Mecânica
+
+            </h3>
+
+            <div id="mecanica">
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- SEGURANÇA -->
+
+    <section class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <h3>
+
+                🛡 Segurança
+
+            </h3>
+
+            <div id="seguranca">
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- LIMPEZA -->
+
+    <section class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <h3>
+
+                🧹 Limpeza
+
+            </h3>
+
+            <div id="limpeza">
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CONFORTO -->
+
+    <section class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <h3>
+
+                💧 Conforto
+
+            </h3>
+
+            <div id="conforto">
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FOTOS -->
+
+    <section class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <h3>
+
+                📷 Fotos da Inspeção
+
+            </h3>
+
+            <div id="fotos">
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- OBSERVAÇÕES -->
+
+    <section class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <h3>
+
+                📝 Observações
+
+            </h3>
+
+            <textarea
+                id="observacoes"
+                rows="5"
+                class="form-control">
+
+            </textarea>
+
+        </div>
+
+    </section>
+
+    <!-- BOTÃO -->
+
+    <button
+        id="btnGerar"
+        class="btn btn-primary btn-lg w-100">
+
+        Gerar Relatório
+
+    </button>
+
+    <br><br><br>
+
 </div>
 
-<div class="container">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- ================= PROGRESS ================= -->
-  <div class="progress-container">
-    <div class="progress-bar" id="progressBar"></div>
-  </div>
-
-  <!-- ================= IDENTIFICAÇÃO ================= -->
-  <div class="card-section">
-
-    <div class="card-header" onclick="toggleCard('identificacao')">
-      👤 Identificação
-      <span>▼</span>
-    </div>
-
-    <div class="card-body" id="identificacao">
-
-      <label>Motorista</label>
-      <input type="text" id="motorista">
-
-      <label>Placa</label>
-      <input type="text" id="placa">
-
-      <label>Prefixo</label>
-      <input type="text" id="prefixo">
-
-      <label>Destino</label>
-      <input type="text" id="destino">
-
-      <label>Data</label>
-      <input type="date" id="data">
-
-      <label>Hora</label>
-      <input type="time" id="hora">
-
-    </div>
-  </div>
-
-  <!-- ================= DOCUMENTAÇÃO ================= -->
-  <div class="card-section">
-
-    <div class="card-header" onclick="toggleCard('doc')">
-      📄 Documentação
-      <span>▼</span>
-    </div>
-
-    <div class="card-body" id="doc">
-
-      <label>CRLV</label>
-      <select id="crlv">
-        <option value="">Selecione</option>
-        <option value="ok">Conforme</option>
-        <option value="pendencia">Pendência</option>
-      </select>
-
-      <label>Certificado de Vistoria</label>
-      <select id="vistoria">
-        <option value="">Selecione</option>
-        <option value="ok">Conforme</option>
-        <option value="pendencia">Pendência</option>
-      </select>
-
-      <label>ANTT</label>
-      <select id="antt">
-        <option value="">Selecione</option>
-        <option value="ok">Conforme</option>
-        <option value="pendencia">Pendência</option>
-      </select>
-
-      <label>Cronotacógrafo</label>
-      <select id="cronotacografo">
-        <option value="">Selecione</option>
-        <option value="ok">Conforme</option>
-        <option value="pendencia">Pendência</option>
-      </select>
-
-    </div>
-  </div>
-
-  <!-- ================= MECÂNICA ================= -->
-  <div class="card-section">
-    <div class="card-header" onclick="toggleCard('mecanica')">
-      🔧 Mecânica <span>▼</span>
-    </div>
-
-    <div class="card-body" id="mecanica">
-
-      <label>Freios</label>
-      <select id="freios">
-        <option value="">Selecione</option>
-        <option value="ok">Conforme</option>
-        <option value="pendencia">Pendência</option>
-      </select>
-
-      <label>Pneus</label>
-      <select id="pneus">
-        <option value="">Selecione</option>
-        <option value="ok">Conforme</option>
-        <option value="pendencia">Pendência</option>
-      </select>
-
-      <label>Ar-condicionado</label>
-      <select id="arcondicionado">
-        <option value="">Selecione</option>
-        <option value="ok">Conforme</option>
-        <option value="pendencia">Pendência</option>
-      </select>
-
-    </div>
-  </div>
-
-  <!-- ================= SEGURANÇA ================= -->
-  <div class="card-section">
-    <div class="card-header" onclick="toggleCard('seguranca')">
-      🛡 Segurança <span>▼</span>
-    </div>
-
-    <div class="card-body" id="seguranca">
-
-      <label>Extintor</label>
-      <select id="extintor">
-        <option value="">Selecione</option>
-        <option value="ok">Conforme</option>
-        <option value="pendencia">Pendência</option>
-      </select>
-
-      <label>Cinto de segurança</label>
-      <select id="cinto">
-        <option value="">Selecione</option>
-        <option value="ok">Conforme</option>
-        <option value="pendencia">Pendência</option>
-      </select>
-
-    </div>
-  </div>
-
-  <!-- ================= LIMPEZA ================= -->
-  <div class="card-section">
-    <div class="card-header" onclick="toggleCard('limpeza')">
-      🧹 Limpeza <span>▼</span>
-    </div>
-
-    <div class="card-body" id="limpeza">
-
-      <label>Limpeza interna</label>
-      <select id="limpeza_interna">
-        <option value="">Selecione</option>
-        <option value="ok">Conforme</option>
-        <option value="pendencia">Pendência</option>
-      </select>
-
-      <label>Limpeza externa</label>
-      <select id="limpeza_externa">
-        <option value="">Selecione</option>
-        <option value="ok">Conforme</option>
-        <option value="pendencia">Pendência</option>
-      </select>
-
-    </div>
-  </div>
-
-  <!-- ================= CONFORTo ================= -->
-  <div class="card-section">
-    <div class="card-header" onclick="toggleCard('conforto')">
-      💧 Conforto <span>▼</span>
-    </div>
-
-    <div class="card-body" id="conforto">
-
-      <label>Água mineral</label>
-      <select id="agua">
-        <option value="">Selecione</option>
-        <option value="ok">Conforme</option>
-        <option value="pendencia">Pendência</option>
-      </select>
-
-    </div>
-  </div>
-
-  <!-- ================= OBSERVAÇÕES ================= -->
-  <div class="card-section">
-    <div class="card-header" onclick="toggleCard('obs')">
-      📝 Observações <span>▼</span>
-    </div>
-
-    <div class="card-body" id="obs">
-
-      <textarea id="observacoes" rows="4" placeholder="Digite observações..."></textarea>
-
-    </div>
-  </div>
-
-  <!-- ================= BOTÃO ================= -->
-  <button class="btn-primary" onclick="gerarRelatorio()">
-    GERAR RELATÓRIO
-  </button>
-
-</div>
-
-<!-- ================= JS ================= -->
-<script>
-
-function toggleCard(id) {
-  var el = document.getElementById(id);
-  if (el.style.display === "block") {
-    el.style.display = "none";
-  } else {
-    el.style.display = "block";
-  }
-}
-
-// PROGRESS SIMPLES (BASE)
-function atualizarProgresso() {
-  let inputs = document.querySelectorAll("select, input, textarea");
-  let total = inputs.length;
-  let preenchidos = 0;
-
-  inputs.forEach(i => {
-    if (i.value && i.value !== "") {
-      preenchidos++;
-    }
-  });
-
-  let percent = Math.round((preenchidos / total) * 100);
-
-  document.getElementById("progressBar").style.width = percent + "%";
-}
-
-// EVENTOS
-document.querySelectorAll("select, input, textarea").forEach(el => {
-  el.addEventListener("change", atualizarProgresso);
-  el.addEventListener("keyup", atualizarProgresso);
-});
-
-function gerarRelatorio() {
-  alert("Módulo 3 (PDF) será implementado em seguida 🚀");
-}
-
-function preencherDataHora() {
-  const agora = new Date();
-
-  const data = agora.toISOString().split('T')[0];
-  const hora = agora.toTimeString().split(':')[0] + ":" + agora.toTimeString().split(':')[1];
-
-  document.getElementById("data").value = data;
-  document.getElementById("hora").value = hora;
-}
-
-window.onload = function () {
-  preencherDataHora();
-};
-
-</script>
+<script src="script.js"></script>
 
 </body>
+
 </html>
