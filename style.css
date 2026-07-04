@@ -219,6 +219,7 @@ textarea {
 
 .status button {
     flex: 1;
+    gap: 6px;
     min-width: 95px;
     padding: 9px;
     border: none;
