@@ -85,27 +85,28 @@ async function testarServidor() {
     try {
 
         const resposta = await fetch(URL_WEBAPP, {
+
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+
             body: JSON.stringify({
-                teste: true,
-                data: new Date().toISOString()
+
+                teste: true
+
             })
+
         });
 
-        const json = await resposta.json();
+        const texto = await resposta.text();
 
-        console.log("Resposta:", json);
+        console.log(texto);
 
-        alert(JSON.stringify(json, null, 2));
+        alert(texto);
 
-    } catch (erro) {
+    }
+
+    catch (erro) {
 
         console.error(erro);
-
-        alert("Erro:\n" + erro);
 
     }
 
