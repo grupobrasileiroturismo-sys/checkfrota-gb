@@ -153,10 +153,31 @@ async function enviarFormulario(){
 //======================================
 
 function coletarDadosFormulario(){
+    function coletarDadosFormulario(){
+
+    const dados = {
+
+        motorista: document.getElementById("motorista")?.value || "",
+
+        prefixo: document.getElementById("prefixo")?.value || "",
+
+        placa: document.getElementById("placa")?.value || "",
+
+        data: document.getElementById("data")?.value || "",
+
+        hora: document.getElementById("hora")?.value || "",
+
+        checklist: obterChecklist()
+
+    };
+
+    console.log("Dados coletados:", dados);
+
+    return dados;
+
+}
 
     return{
-
-        empresa:document.getElementById("empresa")?.value || "",
 
         motorista:document.getElementById("motorista")?.value || "",
 
