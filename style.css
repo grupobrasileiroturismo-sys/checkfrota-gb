@@ -259,11 +259,12 @@ textarea {
 ========================================= */
 
 .progress-box {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .progress-bar-container {
     width: 100%;
+    margin: 0 16px;
     height: 10px;
     background: #E6E6E6;
     border-radius: 20px;
@@ -271,13 +272,14 @@ textarea {
 }
 
 .progress-bar {
-    height: 94%;
+    height: 100%;
     width: 0%;
     background: linear-gradient(90deg, var(--secondary), var(--primary));
     transition: width 0.3s ease;
 }
 
 .progress-text{
+    margin: 8px 16px 0;
     display:flex;
     justify-content:space-between;
     align-items:center;
