@@ -221,12 +221,12 @@ textarea {
 }
 
 .status button {
-    flex: 0 1 232px;
+    flex: 0 1 220px;
     min-width: 95px;
     padding: 8px 10px;
     border: none;
     border-radius: 8px;
-    font-size: 12px;
+    font-size: 10px;
     cursor: pointer;
     background: #f1f1f1;
     transition: 0.2s ease;
