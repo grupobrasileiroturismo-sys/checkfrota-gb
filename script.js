@@ -154,7 +154,7 @@ async function enviarFormulario(){
 
 function coletarDadosFormulario(){
 
-    return {
+    const dados = {
 
         motorista: document.getElementById("motorista")?.value || "",
 
@@ -169,5 +169,9 @@ function coletarDadosFormulario(){
         checklist: obterChecklist()
 
     };
+
+    console.log("Dados coletados:", dados);
+
+    return dados;
 
 }
