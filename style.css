@@ -199,11 +199,14 @@ textarea {
     border-bottom: 1px solid #eee;
 }
 
-.item-title {
+.item-title{
+    font-size: 18px;
     font-weight: 600;
-    font-size: 13px;
-    margin-bottom: 8px;
-    
+
+    margin-bottom: 12px;
+
+    padding-left: 14px;
+    padding-right: 14px;
 }
 
 
