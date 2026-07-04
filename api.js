@@ -11,31 +11,42 @@ const URL_WEBAPP = "https://script.google.com/macros/s/AKfycbzyquYVqaKMpdlLbThex
 
 async function enviarInspecao(dados){
 
-    const envio = {
-        ...dados,
-        fotos:{}
-    };
+    try{
 
-    for(const id in imagens){
+        const envio = {
+            ...dados,
+            fotos:{}
+        };
 
-        if(imagens[id]){
-            envio.fotos[id] = await blobParaBase64(imagens[id]);
+        for(const id in imagens){
+
+            if(imagens[id]){
+                envio.fotos[id] = await blobParaBase64(imagens[id]);
+            }
+
         }
 
+        const form = new FormData();
+        form.append("dados", JSON.stringify(envio));
+
+        const resposta = await fetch(URL_WEBAPP,{
+            method:"POST",
+            body:form
+        });
+
+        const texto = await resposta.text();
+
+        console.log("Resposta bruta do servidor:");
+        console.log(texto);
+
+        return JSON.parse(texto);
+
+    }catch(erro){
+
+        console.error("Erro no enviarInspecao:", erro);
+
+        throw erro;
+
     }
-
-    const form = new FormData();
-
-    form.append("dados", JSON.stringify(envio));
-
-    const resposta = await fetch(URL_WEBAPP,{
-
-        method:"POST",
-
-        body:form
-
-    });
-
-    return await resposta.json();
 
 }
