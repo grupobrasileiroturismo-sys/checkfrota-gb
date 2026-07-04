@@ -27,7 +27,7 @@ const FOTOS = [
     }
 ];
 
-// Armazena as imagens em Base64
+// Armazena os blobs comprimidos
 const imagens = {};
 
 // =============================
@@ -198,15 +198,7 @@ async function carregarFoto(event,id){
 
         const fotoComprimida = await comprimirImagem(arquivo);
 
-        const reader = new FileReader();
-
-        reader.onloadend = function(){
-
-            imagens[id] = reader.result;
-
-        };
-
-        reader.readAsDataURL(fotoComprimida);
+        imagens[id] = fotoComprimida;
 
         const tamanho = (fotoComprimida.size/1024).toFixed(0);
 
@@ -239,7 +231,7 @@ async function comprimirImagem(file) {
 
             img.onload = function () {
 
-                const MAX = 1024;
+                const MAX = 720;
 
                 let width = img.width;
                 let height = img.height;
@@ -288,7 +280,7 @@ async function comprimirImagem(file) {
 
                     "image/jpeg",
 
-                    0.75
+                    0.60
 
                 );
 
@@ -299,6 +291,26 @@ async function comprimirImagem(file) {
         };
 
         reader.readAsDataURL(file);
+
+    });
+
+}
+
+// =============================================
+// BLOB -> BASE64
+// =============================================
+
+function blobParaBase64(blob){
+
+    return new Promise((resolve,reject)=>{
+
+        const reader = new FileReader();
+
+        reader.onloadend = ()=>resolve(reader.result);
+
+        reader.onerror = reject;
+
+        reader.readAsDataURL(blob);
 
     });
 
