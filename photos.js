@@ -188,8 +188,6 @@ function removerFoto(id){
 
 }
 
-}
-
 
 // =============================
 // CARREGA FOTO
