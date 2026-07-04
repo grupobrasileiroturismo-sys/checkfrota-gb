@@ -154,6 +154,8 @@ textarea {
 
     border-left:6px solid var(--primary);
 
+    border-right:6px solid var(--primary);
+
     margin-bottom:18px;
 
     box-shadow:var(--shadow);
@@ -200,7 +202,6 @@ textarea {
 .item-title {
     font-weight: 600;
     font-size: 12px;
-    gap: 10px;
     margin-bottom: 8px;
     
 }
