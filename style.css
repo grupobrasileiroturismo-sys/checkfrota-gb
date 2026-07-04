@@ -200,7 +200,6 @@ textarea {
 }
 
 .item-title {
-    flex: 1;
     gap: 6px;
     font-weight: 600;
     font-size: 13px;
