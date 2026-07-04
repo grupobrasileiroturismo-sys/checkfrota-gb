@@ -154,13 +154,15 @@ async function enviarFormulario(){
 
 function coletarDadosFormulario(){
 
-    const dados = {
+    return {
 
-        motorista: document.getElementById("motorista")?.value || "",
+        motorista: document.getElementById("txtmotorista")?.value.trim().toUpperCase() || "",
 
-        prefixo: document.getElementById("prefixo")?.value || "",
+        prefixo: document.getElementById("txtprefixo")?.value.trim().toUpperCase() || "",
 
-        placa: document.getElementById("placa")?.value || "",
+        placa: document.getElementById("txtplaca")?.value.trim().toUpperCase() || "",
+
+        destino: document.getElementById("txtdestino")?.value.trim().toUpperCase() || "",
 
         data: document.getElementById("data")?.value || "",
 
@@ -169,9 +171,5 @@ function coletarDadosFormulario(){
         checklist: obterChecklist()
 
     };
-
-    console.log("Dados coletados:", dados);
-
-    return dados;
 
 }
