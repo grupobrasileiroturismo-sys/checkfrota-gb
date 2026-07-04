@@ -221,7 +221,7 @@ textarea {
 }
 
 .status button {
-    flex: 0 1 230px;
+    flex: 0 1 240px;
     min-width: 95px;
     padding: 8px 10px;
     border: none;
@@ -259,12 +259,12 @@ textarea {
 ========================================= */
 
 .progress-box {
-    margin-top: 15px;
+    margin-top: 13px;
 }
 
 .progress-bar-container {
     width: 96%;
-    margin: 0 16px;
+    margin: 0 14px;
     height: 10px;
     background: #E6E6E6;
     border-radius: 20px;
@@ -279,7 +279,7 @@ textarea {
 }
 
 .progress-text{
-    margin: 8px 16px 0;
+    margin: 8px 14px 0;
     display:flex;
     justify-content:space-between;
     align-items:center;
