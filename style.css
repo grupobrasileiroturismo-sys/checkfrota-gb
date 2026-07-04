@@ -271,6 +271,7 @@ textarea {
 }
 
 .progress-bar {
+    margin: 0 24px;
     height: 100%;
     width: 0%;
     background: linear-gradient(90deg, var(--secondary), var(--primary));
