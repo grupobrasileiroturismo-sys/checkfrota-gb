@@ -3,7 +3,10 @@
 // Controle de Fotos da Inspeção
 // =============================================
 
-// Fotos da inspeção
+// =============================================
+// CONFIGURAÇÃO DAS FOTOS
+// =============================================
+
 const FOTOS = [
     {
         id: "frontal",
@@ -27,12 +30,15 @@ const FOTOS = [
     }
 ];
 
-// Armazena os blobs comprimidos
+// Blob comprimido
 const imagens = {};
 
-// =============================
+// URL temporária usada apenas para liberar memória
+const objectUrls = {};
+
+// =============================================
 // CRIA OS CARDS
-// =============================
+// =============================================
 
 function criarFotos() {
 
@@ -43,6 +49,7 @@ function criarFotos() {
     FOTOS.forEach(foto => {
 
         imagens[foto.id] = null;
+        objectUrls[foto.id] = null;
 
         const card = document.createElement("div");
 
@@ -60,7 +67,6 @@ function criarFotos() {
 
             <div class="photo-card">
 
-
                 <div
                     id="placeholder-${foto.id}"
                     class="photo-placeholder">
@@ -69,12 +75,14 @@ function criarFotos() {
                         <i class="bi bi-camera-fill"></i>
                     </div>
 
-                    <div id="photoInfo-${foto.id}" class="photo-info">
+                    <div
+                        id="photoInfo-${foto.id}"
+                        class="photo-info">
 
                         Nenhum arquivo selecionado
 
                     </div>
-                
+
                 </div>
 
                 <input
@@ -82,20 +90,6 @@ function criarFotos() {
                     type="file"
                     accept="image/*"
                     capture="environment"
-                    hidden>
-                
-                </div>
-
-                <input
-
-                    id="input-${foto.id}"
-
-                    type="file"
-
-                    accept="image/*"
-
-                    capture="environment"
-
                     hidden>
 
             </div>
@@ -103,9 +97,7 @@ function criarFotos() {
             <div class="photo-actions mt-2">
 
                 <button
-
                     class="btn btn-outline-primary btn-sm"
-
                     onclick="abrirCamera('${foto.id}')">
 
                     📷 Adicionar
@@ -113,9 +105,7 @@ function criarFotos() {
                 </button>
 
                 <button
-
                     class="btn btn-outline-secondary btn-sm"
-
                     onclick="trocarFoto('${foto.id}')">
 
                     🔄 Trocar
@@ -123,9 +113,7 @@ function criarFotos() {
                 </button>
 
                 <button
-
                     class="btn btn-outline-danger btn-sm"
-
                     onclick="removerFoto('${foto.id}')">
 
                     🗑 Remover
@@ -138,17 +126,27 @@ function criarFotos() {
 
         container.appendChild(card);
 
-        document
-            .getElementById(`input-${foto.id}`)
-            .addEventListener("change", e => carregarFoto(e, foto.id));
+        configurarInput(foto.id);
 
     });
 
 }
 
-// =============================
+// =============================================
+// CONFIGURA INPUT
+// =============================================
+
+function configurarInput(id){
+
+    const input = document.getElementById(`input-${id}`);
+
+    input.addEventListener("change", e => carregarFoto(e,id));
+
+}
+
+// =============================================
 // ABRIR CÂMERA
-// =============================
+// =============================================
 
 function abrirCamera(id){
 
@@ -158,9 +156,9 @@ function abrirCamera(id){
 
 }
 
-// =============================
+// =============================================
 // TROCAR FOTO
-// =============================
+// =============================================
 
 function trocarFoto(id){
 
@@ -168,25 +166,40 @@ function trocarFoto(id){
 
 }
 
-// =============================
-// REMOVER FOTO
-// =============================
+// =============================================
+// REMOVE FOTO
+// =============================================
 
 function removerFoto(id){
 
-    imagens[id]=null;
+    imagens[id] = null;
+
+    // libera URL antiga
+    if(objectUrls[id]){
+
+        URL.revokeObjectURL(objectUrls[id]);
+
+        objectUrls[id] = null;
+
+    }
 
     document.getElementById(`photoInfo-${id}`).innerHTML =
         "Nenhum arquivo selecionado";
 
-    document.getElementById(`input-${id}`).value="";
+    // recria completamente o input
+    const antigo = document.getElementById(`input-${id}`);
+
+    const novo = antigo.cloneNode(true);
+
+    antigo.parentNode.replaceChild(novo,antigo);
+
+    configurarInput(id);
 
 }
 
-
-// =============================
+// =============================================
 // CARREGA FOTO
-// =============================
+// =============================================
 
 async function carregarFoto(event,id){
 
@@ -196,40 +209,57 @@ async function carregarFoto(event,id){
 
     try{
 
-        const fotoComprimida = await comprimirImagem(arquivo);
+        // libera URL anterior
+        if(objectUrls[id]){
 
-        imagens[id] = fotoComprimida;
+            URL.revokeObjectURL(objectUrls[id]);
 
-        const tamanho = (fotoComprimida.size/1024).toFixed(0);
+            objectUrls[id]=null;
 
-        document.getElementById(`photoInfo-${id}`).innerHTML = `
+        }
+
+        const blob = await comprimirImagem(arquivo);
+
+        imagens[id]=blob;
+
+        const tamanho=(blob.size/1024).toFixed(0);
+
+        document.getElementById(`photoInfo-${id}`).innerHTML=`
+
             <strong>${arquivo.name}</strong><br>
+
             ${tamanho} KB
+
         `;
 
-    }catch(e){
+    }
 
-        alert("Erro ao carregar a foto.");
+    catch(e){
+
+        console.error(e);
+
+        alert("Erro ao carregar foto.");
 
     }
 
 }
 
-// =============================
-// CONVERTER FOTO
-// =============================
+// =============================================
+// COMPRIME IMAGEM
+// =============================================
 
 async function comprimirImagem(file) {
 
     return new Promise((resolve, reject) => {
 
-        const reader = new FileReader();
+        // Cria uma URL temporária (muito mais leve que Base64)
+        const imageUrl = URL.createObjectURL(file);
 
-        reader.onload = function (event) {
+        const img = new Image();
 
-            const img = new Image();
+        img.onload = () => {
 
-            img.onload = function () {
+            try {
 
                 const MAX = 720;
 
@@ -240,7 +270,7 @@ async function comprimirImagem(file) {
 
                     if (width > MAX) {
 
-                        height = height * MAX / width;
+                        height = Math.round(height * (MAX / width));
                         width = MAX;
 
                     }
@@ -249,7 +279,7 @@ async function comprimirImagem(file) {
 
                     if (height > MAX) {
 
-                        width = width * MAX / height;
+                        width = Math.round(width * (MAX / height));
                         height = MAX;
 
                     }
@@ -261,36 +291,61 @@ async function comprimirImagem(file) {
                 canvas.width = width;
                 canvas.height = height;
 
-                const ctx = canvas.getContext("2d");
+                const ctx = canvas.getContext("2d", {
+                    alpha: false,
+                    willReadFrequently: false
+                });
 
                 ctx.drawImage(img, 0, 0, width, height);
 
-                canvas.toBlob(
+                // Libera imediatamente a imagem original
+                URL.revokeObjectURL(imageUrl);
 
-                    blob => {
+                img.src = "";
 
-                        if (!blob) {
-                            reject("Erro ao comprimir imagem.");
-                            return;
-                        }
+                canvas.toBlob(blob => {
 
-                        resolve(blob);
+                    // Limpeza pesada de memória
+                    ctx.clearRect(0, 0, width, height);
 
-                    },
+                    canvas.width = 1;
+                    canvas.height = 1;
 
-                    "image/jpeg",
+                    if (!blob) {
 
-                    0.60
+                        reject("Erro ao comprimir imagem.");
 
-                );
+                        return;
 
-            };
+                    }
 
-            img.src = event.target.result;
+                    resolve(blob);
+
+                },
+                "image/jpeg",
+                0.60);
+
+            }
+
+            catch (erro) {
+
+                URL.revokeObjectURL(imageUrl);
+
+                reject(erro);
+
+            }
 
         };
 
-        reader.readAsDataURL(file);
+        img.onerror = () => {
+
+            URL.revokeObjectURL(imageUrl);
+
+            reject("Erro ao abrir imagem.");
+
+        };
+
+        img.src = imageUrl;
 
     });
 
@@ -298,15 +353,24 @@ async function comprimirImagem(file) {
 
 // =============================================
 // BLOB -> BASE64
+// (Somente quando finalizar a inspeção)
 // =============================================
 
-function blobParaBase64(blob){
+function blobParaBase64(blob) {
 
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
 
         const reader = new FileReader();
 
-        reader.onloadend = ()=>resolve(reader.result);
+        reader.onloadend = () => {
+
+            const resultado = reader.result;
+
+            reader.abort();
+
+            resolve(resultado);
+
+        };
 
         reader.onerror = reject;
 
@@ -315,3 +379,62 @@ function blobParaBase64(blob){
     });
 
 }
+
+// =============================================
+// RETORNA TODAS AS FOTOS EM BASE64
+// (Será usada quando gerar o PDF)
+// =============================================
+
+async function obterFotosBase64() {
+
+    const fotos = {};
+
+    for (const id in imagens) {
+
+        if (imagens[id]) {
+
+            fotos[id] = await blobParaBase64(imagens[id]);
+
+        }
+
+    }
+
+    return fotos;
+
+}
+
+// =============================================
+// LIMPA TODA A MEMÓRIA DAS FOTOS
+// =============================================
+
+function limparFotos() {
+
+    for (const id in imagens) {
+
+        imagens[id] = null;
+
+    }
+
+    for (const id in objectUrls) {
+
+        if (objectUrls[id]) {
+
+            URL.revokeObjectURL(objectUrls[id]);
+
+            objectUrls[id] = null;
+
+        }
+
+    }
+
+}
+
+// =============================================
+// LIMPA AUTOMATICAMENTE AO SAIR DA PÁGINA
+// =============================================
+
+window.addEventListener("beforeunload", () => {
+
+    limparFotos();
+
+});
