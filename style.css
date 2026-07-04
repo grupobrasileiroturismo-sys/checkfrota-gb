@@ -152,9 +152,9 @@ textarea {
 
     border:1px solid var(--border);
 
-    border-left:6px solid var(--primary);
+    border-left:4px solid var(--primary);
 
-    border-right:6px solid var(--primary);
+    border-right:4px solid var(--primary);
 
     margin-bottom:18px;
 
