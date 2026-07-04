@@ -46,9 +46,7 @@ function configurarEventosGlobais() {
     if (btnFinalizar) {
         btnFinalizar.addEventListener("click", () => {
 
-            if (typeof gerarPDF === "function") {
-                gerarPDF();
-            }
+            enviarFormulario();
 
         });
     }
@@ -109,5 +107,71 @@ async function testarServidor() {
         console.error(erro);
 
     }
+
+}
+
+//======================================
+// ENVIA O FORMULÁRIO
+//======================================
+
+async function enviarFormulario(){
+
+    try{
+
+        const dados = coletarDadosFormulario();
+
+        const resposta = await enviarInspecao(dados);
+
+        if(resposta.sucesso){
+
+            alert(
+                "Relatório gerado com sucesso!\n\nNúmero: " +
+                resposta.numero
+            );
+
+        }else{
+
+            alert(
+                "Erro:\n" +
+                resposta.erro
+            );
+
+        }
+
+    }
+
+    catch(erro){
+
+        console.error(erro);
+
+        alert("Erro ao enviar a inspeção.");
+
+    }
+
+}
+
+//======================================
+// COLETA TODOS OS DADOS
+//======================================
+
+function coletarDadosFormulario(){
+
+    return{
+
+        empresa:document.getElementById("empresa")?.value || "",
+
+        motorista:document.getElementById("motorista")?.value || "",
+
+        prefixo:document.getElementById("prefixo")?.value || "",
+
+        placa:document.getElementById("placa")?.value || "",
+
+        data:document.getElementById("data")?.value || "",
+
+        hora:document.getElementById("hora")?.value || "",
+
+        checklist:obterChecklist()
+
+    };
 
 }

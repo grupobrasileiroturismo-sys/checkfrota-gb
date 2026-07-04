@@ -196,3 +196,51 @@ function atualizarProgresso(){
     if (contador) contador.textContent = `${respondidos} de ${total} itens respondidos`;
 
 }
+
+// =============================================
+// OBTÉM O CHECKLIST PREENCHIDO
+// =============================================
+
+function obterChecklist(){
+
+    const checklist = {};
+
+    Object.keys(CHECKLIST).forEach(categoria => {
+
+        checklist[categoria] = [];
+
+        CHECKLIST[categoria].forEach(item => {
+
+            let status = "na";
+
+            switch(window.respostas[item]){
+
+                case "Conforme":
+                    status = "ok";
+                    break;
+
+                case "Não Conforme":
+                    status = "nok";
+                    break;
+
+                case "Não se aplica":
+                    status = "na";
+                    break;
+
+            }
+
+            checklist[categoria].push({
+
+                nome: item,
+
+                status: status
+
+            });
+
+        });
+
+    });
+
+    return checklist;
+
+}

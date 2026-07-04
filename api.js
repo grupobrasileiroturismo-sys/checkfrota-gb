@@ -5,43 +5,58 @@
 const URL_WEBAPP =
     "https://script.google.com/macros/s/AKfycbzoeFqFi7qMs3BxnYRaB4tW4_DeQ0k2-phVUuP0Z5LKtweCtcXJyN0l1N2OrD0DnKjw/exec";
 
+    
 //========================================
 // ENVIA INSPEÇÃO
 //========================================
 
 async function enviarInspecao(dados){
 
-    const formData = new FormData();
+    try{
 
-    // Dados do formulário
-    formData.append(
-        "dados",
-        JSON.stringify(dados)
-    );
+        const envio = {
+            ...dados,
+            fotos:{}
+        };
 
-    // Fotos
-    for(const id in imagens){
+        for(const id in imagens){
 
-        if(imagens[id]){
+            if(imagens[id]){
 
-            formData.append(
-                id,
-                imagens[id],
-                `${id}.jpg`
-            );
+                envio.fotos[id] = await blobParaBase64(imagens[id]);
+
+            }
 
         }
 
+        const resposta = await fetch(URL_WEBAPP,{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify(envio)
+
+        });
+
+        return await resposta.json();
+
     }
 
-    const resposta = await fetch(URL_WEBAPP,{
+    catch(erro){
 
-        method:"POST",
+        console.error(erro);
 
-        body:formData
+        return{
 
-    });
+            sucesso:false,
 
-    return await resposta.json();
+            erro:erro.message
+
+        };
+
+    }
 
 }
