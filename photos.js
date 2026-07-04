@@ -1,11 +1,11 @@
 // =============================================
-// PHOTOS.JS
-// Controle de Fotos da Inspeção
+// PHOTOS.JS V2
+// CheckFrota GB
 // =============================================
 
-// =============================================
+// ============================
 // CONFIGURAÇÃO DAS FOTOS
-// =============================================
+// ============================
 
 const FOTOS = [
     {
@@ -30,26 +30,24 @@ const FOTOS = [
     }
 ];
 
-// Blob comprimido
+// Armazena somente os blobs comprimidos
 const imagens = {};
 
-// URL temporária usada apenas para liberar memória
-const objectUrls = {};
-
-// =============================================
-// CRIA OS CARDS
-// =============================================
+// ============================
+// CRIA CARDS
+// ============================
 
 function criarFotos() {
 
     const container = document.getElementById("photoContainer");
+
+    if (!container) return;
 
     container.innerHTML = "";
 
     FOTOS.forEach(foto => {
 
         imagens[foto.id] = null;
-        objectUrls[foto.id] = null;
 
         const card = document.createElement("div");
 
@@ -68,20 +66,10 @@ function criarFotos() {
             <div class="photo-card">
 
                 <div
-                    id="placeholder-${foto.id}"
-                    class="photo-placeholder">
+                    id="photoInfo-${foto.id}"
+                    class="photo-info">
 
-                    <div class="photo-icon">
-                        <i class="bi bi-camera-fill"></i>
-                    </div>
-
-                    <div
-                        id="photoInfo-${foto.id}"
-                        class="photo-info">
-
-                        Nenhum arquivo selecionado
-
-                    </div>
+                    Nenhum arquivo selecionado
 
                 </div>
 
@@ -132,21 +120,25 @@ function criarFotos() {
 
 }
 
-// =============================================
+// ============================
 // CONFIGURA INPUT
-// =============================================
+// ============================
 
 function configurarInput(id){
 
     const input = document.getElementById(`input-${id}`);
 
-    input.addEventListener("change", e => carregarFoto(e,id));
+    input.addEventListener("change",(e)=>{
+
+        carregarFoto(e,id);
+
+    });
 
 }
 
-// =============================================
+// ============================
 // ABRIR CÂMERA
-// =============================================
+// ============================
 
 function abrirCamera(id){
 
@@ -156,9 +148,9 @@ function abrirCamera(id){
 
 }
 
-// =============================================
+// ============================
 // TROCAR FOTO
-// =============================================
+// ============================
 
 function trocarFoto(id){
 
@@ -166,40 +158,31 @@ function trocarFoto(id){
 
 }
 
-// =============================================
-// REMOVE FOTO
-// =============================================
+// ============================
+// REMOVER FOTO
+// ============================
 
 function removerFoto(id){
 
     imagens[id] = null;
 
-    // libera URL antiga
-    if(objectUrls[id]){
-
-        URL.revokeObjectURL(objectUrls[id]);
-
-        objectUrls[id] = null;
-
-    }
-
     document.getElementById(`photoInfo-${id}`).innerHTML =
         "Nenhum arquivo selecionado";
 
-    // recria completamente o input
+    // recria o input completamente
     const antigo = document.getElementById(`input-${id}`);
 
     const novo = antigo.cloneNode(true);
 
-    antigo.parentNode.replaceChild(novo,antigo);
+    antigo.parentNode.replaceChild(novo, antigo);
 
     configurarInput(id);
 
 }
 
-// =============================================
-// CARREGA FOTO
-// =============================================
+// ============================
+// CARREGAR FOTO
+// ============================
 
 async function carregarFoto(event,id){
 
@@ -209,24 +192,18 @@ async function carregarFoto(event,id){
 
     try{
 
-        // libera URL anterior
-        if(objectUrls[id]){
-
-            URL.revokeObjectURL(objectUrls[id]);
-
-            objectUrls[id]=null;
-
-        }
-
+        // comprime a imagem
         const blob = await comprimirImagem(arquivo);
 
-        imagens[id]=blob;
+        imagens[id] = blob;
 
-        const tamanho=(blob.size/1024).toFixed(0);
+        const tamanho = (blob.size/1024).toFixed(0);
 
-        document.getElementById(`photoInfo-${id}`).innerHTML=`
+        document.getElementById(`photoInfo-${id}`).innerHTML = `
 
-            <strong>${arquivo.name}</strong><br>
+            <strong>${arquivo.name}</strong>
+
+            <br>
 
             ${tamanho} KB
 
@@ -234,32 +211,31 @@ async function carregarFoto(event,id){
 
     }
 
-    catch(e){
+    catch(erro){
 
-        console.error(e);
+        console.error(erro);
 
-        alert("Erro ao carregar foto.");
+        alert("Erro ao carregar a foto.");
 
     }
 
 }
 
 // =============================================
-// COMPRIME IMAGEM
+// COMPRESSÃO DE IMAGEM
 // =============================================
 
 async function comprimirImagem(file) {
 
     return new Promise((resolve, reject) => {
 
-        // Cria uma URL temporária (muito mais leve que Base64)
-        const imageUrl = URL.createObjectURL(file);
+        const reader = new FileReader();
 
-        const img = new Image();
+        reader.onload = function (e) {
 
-        img.onload = () => {
+            const img = new Image();
 
-            try {
+            img.onload = function () {
 
                 const MAX = 720;
 
@@ -291,27 +267,22 @@ async function comprimirImagem(file) {
                 canvas.width = width;
                 canvas.height = height;
 
-                const ctx = canvas.getContext("2d", {
-                    alpha: false,
-                    willReadFrequently: false
-                });
+                const ctx = canvas.getContext("2d");
 
                 ctx.drawImage(img, 0, 0, width, height);
 
-                // Libera imediatamente a imagem original
-                URL.revokeObjectURL(imageUrl);
+                canvas.toBlob(function(blob){
 
-                img.src = "";
+                    // Limpeza imediata de memória
 
-                canvas.toBlob(blob => {
-
-                    // Limpeza pesada de memória
-                    ctx.clearRect(0, 0, width, height);
+                    ctx.clearRect(0,0,width,height);
 
                     canvas.width = 1;
                     canvas.height = 1;
 
-                    if (!blob) {
+                    img.src = "";
+
+                    if(!blob){
 
                         reject("Erro ao comprimir imagem.");
 
@@ -322,30 +293,30 @@ async function comprimirImagem(file) {
                     resolve(blob);
 
                 },
+
                 "image/jpeg",
+
                 0.60);
 
-            }
+            };
 
-            catch (erro) {
+            img.onerror = function(){
 
-                URL.revokeObjectURL(imageUrl);
+                reject("Erro ao abrir imagem.");
 
-                reject(erro);
+            };
 
-            }
-
-        };
-
-        img.onerror = () => {
-
-            URL.revokeObjectURL(imageUrl);
-
-            reject("Erro ao abrir imagem.");
+            img.src = e.target.result;
 
         };
 
-        img.src = imageUrl;
+        reader.onerror = function(){
+
+            reject("Erro ao ler arquivo.");
+
+        };
+
+        reader.readAsDataURL(file);
 
     });
 
@@ -353,22 +324,17 @@ async function comprimirImagem(file) {
 
 // =============================================
 // BLOB -> BASE64
-// (Somente quando finalizar a inspeção)
 // =============================================
 
-function blobParaBase64(blob) {
+function blobParaBase64(blob){
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve,reject)=>{
 
         const reader = new FileReader();
 
-        reader.onloadend = () => {
+        reader.onloadend = function(){
 
-            const resultado = reader.result;
-
-            reader.abort();
-
-            resolve(resultado);
+            resolve(reader.result);
 
         };
 
@@ -381,17 +347,17 @@ function blobParaBase64(blob) {
 }
 
 // =============================================
-// RETORNA TODAS AS FOTOS EM BASE64
-// (Será usada quando gerar o PDF)
+// OBTÉM TODAS AS FOTOS
+// (Usaremos no PDF)
 // =============================================
 
-async function obterFotosBase64() {
+async function obterFotosBase64(){
 
     const fotos = {};
 
-    for (const id in imagens) {
+    for(const id of Object.keys(imagens)){
 
-        if (imagens[id]) {
+        if(imagens[id]){
 
             fotos[id] = await blobParaBase64(imagens[id]);
 
@@ -404,37 +370,59 @@ async function obterFotosBase64() {
 }
 
 // =============================================
-// LIMPA TODA A MEMÓRIA DAS FOTOS
+// VERIFICA OBRIGATÓRIAS
 // =============================================
 
-function limparFotos() {
+function validarFotos(){
 
-    for (const id in imagens) {
+    for(const foto of FOTOS){
 
-        imagens[id] = null;
+        if(foto.obrigatoria && !imagens[foto.id]){
+
+            alert(`Adicione a foto: ${foto.titulo}`);
+
+            return false;
+
+        }
 
     }
 
-    for (const id in objectUrls) {
+    return true;
 
-        if (objectUrls[id]) {
+}
 
-            URL.revokeObjectURL(objectUrls[id]);
+// =============================================
+// LIMPA TODAS AS FOTOS
+// =============================================
 
-            objectUrls[id] = null;
+function limparFotos(){
 
-        }
+    for(const foto of FOTOS){
+
+        imagens[foto.id] = null;
+
+        document.getElementById(`photoInfo-${foto.id}`).innerHTML =
+            "Nenhum arquivo selecionado";
+
+        const antigo = document.getElementById(`input-${foto.id}`);
+
+        const novo = antigo.cloneNode(true);
+
+        antigo.parentNode.replaceChild(novo,antigo);
+
+        configurarInput(foto.id);
 
     }
 
 }
 
 // =============================================
-// LIMPA AUTOMATICAMENTE AO SAIR DA PÁGINA
+// RETORNA BLOBS
+// (Será usado no upload para o Apps Script)
 // =============================================
 
-window.addEventListener("beforeunload", () => {
+function obterBlobs(){
 
-    limparFotos();
+    return imagens;
 
-});
+}
