@@ -233,7 +233,6 @@ textarea {
 }
 
 .status button.active {
-    transform: scale(1.0);
     font-weight: 600;
 }
 
