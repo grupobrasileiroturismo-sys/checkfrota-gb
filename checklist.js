@@ -79,7 +79,24 @@ function criarChecklist(){
         // título da categoria
         const titulo = document.createElement("div");
         titulo.className = "category-title";
-        titulo.innerText = secao.toUpperCase();
+        const icones = {
+
+    documentacao: "bi-file-earmark-text-fill",
+
+    mecanica: "bi-gear-fill",
+
+    seguranca: "bi-shield-check",
+
+    limpeza: "bi-droplet-fill",
+
+    conforto: "bi-stars"
+
+};
+
+titulo.innerHTML = `
+    <i class="bi ${icones[secao]}"></i>
+    ${secao.toUpperCase()}
+`;
 
         card.appendChild(titulo);
 
