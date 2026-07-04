@@ -200,8 +200,9 @@ textarea {
 .item-title {
     font-weight: 600;
     font-size: 12px;
-    margin-bottom: 8px;
     gap: 10px;
+    margin-bottom: 8px;
+    
 }
 
 
