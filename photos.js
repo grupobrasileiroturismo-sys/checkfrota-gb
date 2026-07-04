@@ -60,20 +60,30 @@ function criarFotos() {
 
             <div class="photo-card">
 
-                <img
-                    id="preview-${foto.id}"
-                    class="photo-preview d-none">
 
                 <div
                     id="placeholder-${foto.id}"
                     class="photo-placeholder">
 
-                    📷
+                    <div class="photo-icon">
+                        <i class="bi bi-camera-fill"></i>
+                    </div>
 
-                    <br><br>
+                    <div id="photoInfo-${foto.id}" class="photo-info">
 
-                    Foto  
+                        Nenhum arquivo selecionado
 
+                    </div>
+                
+                </div>
+
+                <input
+                    id="input-${foto.id}"
+                    type="file"
+                    accept="image/*"
+                    capture="environment"
+                    hidden>
+                
                 </div>
 
                 <input
@@ -164,27 +174,12 @@ function trocarFoto(id){
 
 function removerFoto(id){
 
-    imagens[id] = null;
+    imagens[id]=null;
 
-    const preview =
-        document.getElementById(`preview-${id}`);
+    document.getElementById(`photoInfo-${id}`).innerHTML =
+        "Nenhum arquivo selecionado";
 
-    // Libera a memória da imagem
-    if(preview.src){
-        URL.revokeObjectURL(preview.src);
-    }
-
-    preview.src = "";
-
-    preview.classList.add("d-none");
-
-    document
-        .getElementById(`placeholder-${id}`)
-        .classList.remove("d-none");
-
-    document
-        .getElementById(`input-${id}`)
-        .value = "";
+    document.getElementById(`input-${id}`).value="";
 
 }
 
@@ -193,34 +188,19 @@ function removerFoto(id){
 // CARREGA FOTO
 // =============================
 
-async function carregarFoto(event, id) {
+async function carregarFoto(event,id){
 
     const arquivo = event.target.files[0];
 
-    if (!arquivo) return;
+    if(!arquivo) return;
 
-    try {
+    try{
 
-        // Comprime a imagem
         const fotoComprimida = await comprimirImagem(arquivo);
 
-        // Preview (consome menos memória)
-        const preview = document.getElementById(`preview-${id}`);
-
-        const objectURL = URL.createObjectURL(fotoComprimida);
-
-        preview.src = objectURL;
-
-        preview.classList.remove("d-none");
-
-        document
-            .getElementById(`placeholder-${id}`)
-            .classList.add("d-none");
-
-        // Converte o blob comprimido para Base64
         const reader = new FileReader();
 
-        reader.onloadend = function () {
+        reader.onloadend = function(){
 
             imagens[id] = reader.result;
 
@@ -228,9 +208,14 @@ async function carregarFoto(event, id) {
 
         reader.readAsDataURL(fotoComprimida);
 
-    } catch (erro) {
+        const tamanho = (fotoComprimida.size/1024).toFixed(0);
 
-        console.error(erro);
+        document.getElementById(`photoInfo-${id}`).innerHTML = `
+            <strong>${arquivo.name}</strong><br>
+            ${tamanho} KB
+        `;
+
+    }catch(e){
 
         alert("Erro ao carregar a foto.");
 
