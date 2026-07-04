@@ -31,38 +31,56 @@ html, body {
    HEADER
 ========================================= */
 
-header {
-    text-align: center;
-    padding: 18px 10px;
+header{
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:22px;
+
+    text-align:center;
+
+    border-bottom:5px solid var(--gold);
+
 }
 
-header h1 {
-    font-size: 20px;
-    font-weight: 700;
+header h1{
+
+    color:white;
+
+    font-size:26px;
+
+    font-weight:700;
+
 }
 
-header p {
-    font-size: 13px;
-    color: #666;
-}
+header p{
 
+    color:#E8F2F4;
+
+    margin-top:6px;
+
+}
 
 /* =========================================
    CARD GERAL
 ========================================= */
 
-.card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 14px;
-    margin-bottom: 14px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-}
+.card{
 
-.card-title {
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 10px;
+    background:white;
+
+    border-radius:12px;
+
+    border:1px solid var(--border);
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:18px;
+
+    overflow:hidden;
+
 }
 
 
@@ -76,10 +94,16 @@ select {
     width: 100%;
     padding: 10px;
     border-radius: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border);
     font-size: 14px;
     outline: none;
     margin-top: 6px;
+}
+
+input:focus,
+textarea:focus{
+    border-color: var(--secondary);
+    box-shadow:0 0 0 3px rgba(24,183,199,.15);
 }
 
 textarea {
@@ -92,31 +116,36 @@ textarea {
    CHECKLIST - CATEGORIAS (CARDS)
 ========================================= */
 
-.category-card {
-    background: #ffffff;
-    border-radius: 14px;
+.category-card{
 
-    /* 🔥 MAIS CONTRASTE */
-    border: 1px solid #d6dbe3;
+    border:1px solid var(--border);
 
-    /* 🔥 SOMBRA MAIS FORTE (profundidade real) */
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
+    border-left:6px solid var(--primary);
 
-    padding: 14px;
-    margin-bottom: 16px;
+    border-radius:12px;
 
-    /* 🔥 destaque lateral mais forte */
-    border-left: 5px solid #1976D2;
+    margin-bottom:20px;
 
-    transition: all 0.2s ease;
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
 }
 
-.category-title {
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 12px;
-    color: #1a1a1a;
-    letter-spacing: 0.5px;
+.category-title{
+
+    background:#F8FAFB;
+
+    padding:14px 18px;
+
+    color:var(--primary);
+
+    font-size:14px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
 }
 
 
@@ -196,7 +225,7 @@ textarea {
 .progress-bar {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #4CAF50, #1B5E20);
+    background: linear-gradient(90deg, var(--secondary), var(--primary));
     transition: width 0.3s ease;
 }
 
@@ -300,6 +329,17 @@ textarea {
 
 #btnFinalizar:active {
     transform: scale(0.98);
+}
+#btnFinalizar{
+
+    background:var(--primary);
+
+}
+
+#btnFinalizar:hover{
+
+    background:var(--primary-dark);
+
 }
 
 
