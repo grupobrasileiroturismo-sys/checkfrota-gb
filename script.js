@@ -78,24 +78,35 @@ function iniciarDataHora() {
 
 }
 
-async function testarServidor(){
+const URL_WEBAPP = "https://script.google.com/macros/s/AKfycbzj-9KoUraWgy5ttt0lQHSi3YeIeu3JONb9vVWX2O9Q8MjeEAr3DYCD1GKcIqe9KbmS/exec";
 
-    const resposta = await fetch(URL_WEBAPP,{
+async function testarServidor() {
 
-        method:"POST",
+    try {
 
-        headers:{
-            "Content-Type":"application/json"
-        },
+        const resposta = await fetch(URL_WEBAPP, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                teste: true,
+                data: new Date().toISOString()
+            })
+        });
 
-        body:JSON.stringify({
+        const json = await resposta.json();
 
-            teste:true
+        console.log("Resposta:", json);
 
-        })
+        alert(JSON.stringify(json, null, 2));
 
-    });
+    } catch (erro) {
 
-    console.log(await resposta.json());
+        console.error(erro);
+
+        alert("Erro:\n" + erro);
+
+    }
 
 }
