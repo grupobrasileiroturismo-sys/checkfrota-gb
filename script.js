@@ -153,7 +153,6 @@ async function enviarFormulario(){
 //======================================
 
 function coletarDadosFormulario(){
-    function coletarDadosFormulario(){
 
     const dados = {
 
@@ -174,23 +173,5 @@ function coletarDadosFormulario(){
     console.log("Dados coletados:", dados);
 
     return dados;
-
-}
-
-    return{
-
-        motorista:document.getElementById("motorista")?.value || "",
-
-        prefixo:document.getElementById("prefixo")?.value || "",
-
-        placa:document.getElementById("placa")?.value || "",
-
-        data:document.getElementById("data")?.value || "",
-
-        hora:document.getElementById("hora")?.value || "",
-
-        checklist:obterChecklist()
-
-    };
 
 }
