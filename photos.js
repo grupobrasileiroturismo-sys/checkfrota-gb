@@ -169,37 +169,49 @@ function removerFoto(id){
     const preview =
         document.getElementById(`preview-${id}`);
 
-    const placeholder =
-        document.getElementById(`placeholder-${id}`);
+    // Libera a memória da imagem
+    if(preview.src){
+        URL.revokeObjectURL(preview.src);
+    }
 
     preview.src = "";
 
     preview.classList.add("d-none");
 
-    placeholder.classList.remove("d-none");
+    document
+        .getElementById(`placeholder-${id}`)
+        .classList.remove("d-none");
+
+    document
+        .getElementById(`input-${id}`)
+        .value = "";
 
 }
+
+}
+
 
 // =============================
 // CARREGA FOTO
 // =============================
 
-function carregarFoto(event,id){
+async function carregarFoto(event, id) {
 
     const arquivo = event.target.files[0];
 
-    if(!arquivo) return;
+    if (!arquivo) return;
 
-    const reader = new FileReader();
+    try {
 
-    reader.onload = function(e){
+        // Comprime a imagem
+        const fotoComprimida = await comprimirImagem(arquivo);
 
-        imagens[id] = e.target.result;
+        // Preview (consome menos memória)
+        const preview = document.getElementById(`preview-${id}`);
 
-        const preview =
-            document.getElementById(`preview-${id}`);
+        const objectURL = URL.createObjectURL(fotoComprimida);
 
-        preview.src = e.target.result;
+        preview.src = objectURL;
 
         preview.classList.remove("d-none");
 
@@ -207,8 +219,104 @@ function carregarFoto(event,id){
             .getElementById(`placeholder-${id}`)
             .classList.add("d-none");
 
-    };
+        // Converte o blob comprimido para Base64
+        const reader = new FileReader();
 
-    reader.readAsDataURL(arquivo);
+        reader.onloadend = function () {
+
+            imagens[id] = reader.result;
+
+        };
+
+        reader.readAsDataURL(fotoComprimida);
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        alert("Erro ao carregar a foto.");
+
+    }
+
+}
+
+// =============================
+// CONVERTER FOTO
+// =============================
+
+async function comprimirImagem(file) {
+
+    return new Promise((resolve, reject) => {
+
+        const reader = new FileReader();
+
+        reader.onload = function (event) {
+
+            const img = new Image();
+
+            img.onload = function () {
+
+                const MAX = 1024;
+
+                let width = img.width;
+                let height = img.height;
+
+                if (width > height) {
+
+                    if (width > MAX) {
+
+                        height = height * MAX / width;
+                        width = MAX;
+
+                    }
+
+                } else {
+
+                    if (height > MAX) {
+
+                        width = width * MAX / height;
+                        height = MAX;
+
+                    }
+
+                }
+
+                const canvas = document.createElement("canvas");
+
+                canvas.width = width;
+                canvas.height = height;
+
+                const ctx = canvas.getContext("2d");
+
+                ctx.drawImage(img, 0, 0, width, height);
+
+                canvas.toBlob(
+
+                    blob => {
+
+                        if (!blob) {
+                            reject("Erro ao comprimir imagem.");
+                            return;
+                        }
+
+                        resolve(blob);
+
+                    },
+
+                    "image/jpeg",
+
+                    0.75
+
+                );
+
+            };
+
+            img.src = event.target.result;
+
+        };
+
+        reader.readAsDataURL(file);
+
+    });
 
 }
