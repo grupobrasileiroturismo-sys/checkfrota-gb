@@ -76,8 +76,6 @@ function iniciarDataHora() {
 
 }
 
-const URL_WEBAPP = "https://script.google.com/macros/s/AKfycbzj-9KoUraWgy5ttt0lQHSi3YeIeu3JONb9vVWX2O9Q8MjeEAr3DYCD1GKcIqe9KbmS/exec";
-
 async function testarServidor() {
 
     try {
