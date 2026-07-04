@@ -2,26 +2,26 @@
    RESET BASE
 ========================================= */
 
-:root{
+    :root{
 
-    --primary:#0B5A6B;
-    --primary-dark:#083E4A;
+        --primary:#0B5A6B;
+        --primary-dark:#083E4A;
 
-    --secondary:#18B7C7;
+        --secondary:#18B7C7;
 
-    --gold:#D7A128;
+        --gold:#D7A128;
 
-    --background:#F4F6F9;
+        --background:#F4F6F9;
 
-    --white:#FFFFFF;
+        --white:#FFFFFF;
 
-    --text:#222;
+        --text:#222;
 
-    --border:#DCE3E8;
+        --border:#DCE3E8;
 
-    --shadow:0 8px 18px rgba(0,0,0,.08);
+        --shadow:0 8px 18px rgba(0,0,0,.08);
 
-}
+    }
 
 * {
     margin: 0;
