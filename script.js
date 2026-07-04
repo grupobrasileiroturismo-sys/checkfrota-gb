@@ -77,3 +77,25 @@ function iniciarDataHora() {
     horaEl.value = horaFormatada;
 
 }
+
+async function testarServidor(){
+
+    const resposta = await fetch(URL_WEBAPP,{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+            teste:true
+
+        })
+
+    });
+
+    console.log(await resposta.json());
+
+}
