@@ -44,4 +44,3 @@ async function enviarInspecao(dados){
 
     return await resposta.json();
 
-}
