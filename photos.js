@@ -190,6 +190,9 @@ async function carregarFoto(event,id){
 
     if(!arquivo) return;
 
+    // libera a foto anterior da memória
+    imagens[id] = null;
+
     try{
 
         // comprime a imagem
@@ -222,101 +225,90 @@ async function carregarFoto(event,id){
 }
 
 // =============================================
-// COMPRESSÃO DE IMAGEM
+// COMPRESSÃO DE IMAGEM (V2.1)
 // =============================================
 
-async function comprimirImagem(file) {
+async function comprimirImagem(file){
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve,reject)=>{
 
-        const reader = new FileReader();
+        const img = new Image();
 
-        reader.onload = function (e) {
+        const url = URL.createObjectURL(file);
 
-            const img = new Image();
+        img.onload = function(){
 
-            img.onload = function () {
+            const MAX = 640;
 
-                const MAX = 720;
+            let width = img.width;
+            let height = img.height;
 
-                let width = img.width;
-                let height = img.height;
+            if(width > height){
 
-                if (width > height) {
+                if(width > MAX){
 
-                    if (width > MAX) {
-
-                        height = Math.round(height * (MAX / width));
-                        width = MAX;
-
-                    }
-
-                } else {
-
-                    if (height > MAX) {
-
-                        width = Math.round(width * (MAX / height));
-                        height = MAX;
-
-                    }
+                    height = Math.round(height * MAX / width);
+                    width = MAX;
 
                 }
 
-                const canvas = document.createElement("canvas");
+            }else{
 
-                canvas.width = width;
-                canvas.height = height;
+                if(height > MAX){
 
-                const ctx = canvas.getContext("2d");
+                    width = Math.round(width * MAX / height);
+                    height = MAX;
 
-                ctx.drawImage(img, 0, 0, width, height);
+                }
 
-                canvas.toBlob(function(blob){
+            }
 
-                    // Limpeza imediata de memória
+            const canvas = document.createElement("canvas");
 
-                    ctx.clearRect(0,0,width,height);
+            canvas.width = width;
+            canvas.height = height;
 
-                    canvas.width = 1;
-                    canvas.height = 1;
+            const ctx = canvas.getContext("2d");
 
-                    img.src = "";
+            ctx.drawImage(img,0,0,width,height);
 
-                    if(!blob){
+            canvas.toBlob(function(blob){
 
-                        reject("Erro ao comprimir imagem.");
+                // libera memória imediatamente
+                ctx.clearRect(0,0,width,height);
 
-                        return;
+                canvas.width = 1;
+                canvas.height = 1;
 
-                    }
+                URL.revokeObjectURL(url);
 
-                    resolve(blob);
+                img.src = "";
 
-                },
+                if(!blob){
 
-                "image/jpeg",
+                    reject("Erro ao comprimir imagem.");
 
-                0.60);
+                    return;
 
-            };
+                }
 
-            img.onerror = function(){
+                resolve(blob);
 
-                reject("Erro ao abrir imagem.");
-
-            };
-
-            img.src = e.target.result;
-
-        };
-
-        reader.onerror = function(){
-
-            reject("Erro ao ler arquivo.");
+            },
+            "image/jpeg",
+            0.55);
 
         };
 
-        reader.readAsDataURL(file);
+        img.onerror = function(){
+
+            URL.revokeObjectURL(url);
+
+            reject("Erro ao abrir imagem.");
+
+        };
+
+        img.src = url;
 
     });
 
