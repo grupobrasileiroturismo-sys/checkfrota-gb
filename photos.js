@@ -237,7 +237,7 @@ async function comprimirImagem(file) {
 
             img.onload = function () {
 
-                const MAX = 720;
+                const MAX = 900;
 
                 let width = img.width;
                 let height = img.height;
@@ -296,7 +296,7 @@ async function comprimirImagem(file) {
 
                 "image/jpeg",
 
-                0.60);
+                0.80);
 
             };
 
