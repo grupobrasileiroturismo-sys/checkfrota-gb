@@ -2,7 +2,7 @@
 // API
 //========================================
 
-const URL_WEBAPP = "https://script.google.com/macros/s/AKfycbxOKomGEv_-enxgcfNl_tj04td5LXnltneF5bjMWxwdwNAKsjEg51YW7OIGPqhZhkPc/exec";
+const URL_WEBAPP = "https://script.google.com/macros/s/AKfycbxzF6wCCYZcym05LzVWPjKC8FwAkHjIzDts8rcMgauGZG_gv195mN99Hkf3sWy1TQvR/exec";
 
 
 //========================================
