@@ -9,7 +9,7 @@
 
 const CHECKLIST = {
 
-    documentação: [
+    Documentação: [
 
         "CRLV",
         "Certificado de Vistoria",
@@ -18,7 +18,7 @@ const CHECKLIST = {
 
     ],
 
-    mecânica: [
+    Mecânica: [
 
         "Pneus",
         "Freios",
@@ -28,7 +28,7 @@ const CHECKLIST = {
 
     ],
 
-    segurança: [
+    Segurança: [
 
         "Extintor",
         "Cinto de Segurança",
@@ -37,14 +37,14 @@ const CHECKLIST = {
 
     ],
 
-    limpeza: [
+    Limpeza: [
 
         "Limpeza Interna",
         "Limpeza Externa"
 
     ],
 
-    conforto: [
+    Conforto: [
 
         "Água Mineral"
 
