@@ -81,15 +81,15 @@ function criarChecklist(){
         titulo.className = "category-title";
         const icones = {
 
-    documentação: "bi-file-earmark-text-fill",
+    Documentação: "bi-file-earmark-text-fill",
 
-    mecânica: "bi-gear-fill",
+    Mecânica: "bi-gear-fill",
 
-    segurança: "bi-shield-check",
+    Segurança: "bi-shield-check",
 
-    limpeza: "bi-droplet-fill",
+    Limpeza: "bi-droplet-fill",
 
-    conforto: "bi-stars"
+    Conforto: "bi-stars"
 
 };
 
