@@ -129,6 +129,9 @@ async function enviarFormulario(){
                 resposta.numero
             );
 
+            // Reinicia a aplicação
+            location.reload();
+
         }else{
 
             alert(
