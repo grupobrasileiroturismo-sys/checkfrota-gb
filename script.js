@@ -114,6 +114,8 @@ async function testarServidor() {
 
 async function enviarFormulario(){
 
+    mostrarLoading();
+
     try{
 
         const dados = coletarDadosFormulario();
@@ -136,13 +138,15 @@ async function enviarFormulario(){
 
         }
 
-    }
-
-    catch(erro){
+    }catch(erro){
 
         console.error(erro);
 
         alert("Erro ao enviar a inspeção.");
+
+    }finally{
+
+        ocultarLoading();
 
     }
 
@@ -171,5 +175,21 @@ function coletarDadosFormulario(){
         checklist: obterChecklist()
 
     };
+
+}
+
+//======================================
+// LOADING
+//======================================
+
+function mostrarLoading(){
+
+    document.getElementById("loading").style.display = "flex";
+
+}
+
+function ocultarLoading(){
+
+    document.getElementById("loading").style.display = "none";
 
 }
