@@ -555,7 +555,7 @@ LOADING
 
 .camera-footer{
 
-    height:100px;
+    height:110px;
 
     display:flex;
 
@@ -563,7 +563,49 @@ LOADING
 
     align-items:center;
 
-    flex:0 0 100px;
+    background:#111;
+
+}
+
+.camera-shot{
+
+    width:74px;
+
+    height:74px;
+
+    border-radius:50%;
+
+    border:6px solid #FFF;
+
+    background:transparent;
+
+    cursor:pointer;
+
+    transition:.15s;
+
+}
+
+.camera-shot::after{
+
+    content:"";
+
+    display:block;
+
+    width:54px;
+
+    height:54px;
+
+    margin:4px auto;
+
+    border-radius:50%;
+
+    background:#FFF;
+
+}
+
+.camera-shot:active{
+
+    transform:scale(.92);
 
 }
 

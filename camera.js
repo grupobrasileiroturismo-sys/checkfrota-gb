@@ -106,7 +106,6 @@ async function capturarFoto(){
 
     try{
 
-        console.log("1 - Entrou em capturarFoto");
 
         const video = document.getElementById("cameraVideo");
 

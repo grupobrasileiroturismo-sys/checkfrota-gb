@@ -424,8 +424,7 @@ function obterBlobs(){
 async function salvarFotoCamera(id, blob){
 
     try{
-
-        console.log("Entrou em salvarFotoCamera", id, blob);
+        
 
         imagens[id] = blob;
 
