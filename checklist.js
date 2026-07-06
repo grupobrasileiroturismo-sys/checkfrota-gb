@@ -24,7 +24,6 @@ const CHECKLIST = {
         "Freios",
         "Faróis",
         "Limpadores",
-        "Ar-condicionado"
 
     ],
 
@@ -44,9 +43,19 @@ const CHECKLIST = {
 
     ],
 
-    Conforto: [
+    "Serviço de Bordo": [
 
-        "Água Mineral"
+        "Água Mineral",
+        "Ar-condicionado",
+        "Mantas",
+        "Cortinas privacidade",
+        "Encosto para as pernas",
+        "W.C",
+        "Internet",
+        "Audio Visual (TV, DVD, SOM)",
+        "Microfones",
+        "USB (por poltrona)"
+        
 
     ]
 
@@ -89,7 +98,7 @@ function criarChecklist(){
 
     Limpeza: "bi-droplet-fill",
 
-    Conforto: "bi-stars"
+    "Serviço de Bordo": "bi-stars"
 
 };
 
