@@ -552,17 +552,23 @@ LOADING
 
 .camera-header{
 
-    height: 60px;
+    padding-top:env(safe-area-inset-top);
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    height:calc(60px + env(safe-area-inset-top));
 
-    padding: 0 20px;
+    display:flex;
 
-    color: #FFF;
+    justify-content:space-between;
 
-    flex: 0 0 60;
+    align-items:center;
+
+    padding-left:20px;
+
+    padding-right:20px;
+
+    color:#FFF;
+
+    flex-shrink:0;
 
 }
 
