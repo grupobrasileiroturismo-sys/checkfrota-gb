@@ -228,13 +228,13 @@ async function carregarFoto(event,id){
 // COMPRESSÃO DE IMAGEM (V2.1)
 // =============================================
 
-async function comprimirImagem(file){
+async function comprimirImagem(arquivo){
 
     return new Promise((resolve,reject)=>{
 
         const img = new Image();
 
-        const url = URL.createObjectURL(file);
+        const url = URL.createObjectURL(arquivo);
 
         img.onload = function(){
 

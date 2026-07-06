@@ -403,7 +403,7 @@ textarea {
 }
 
 #btnFinalizar:hover{
-    backgroud:var(--primary-dark)
+    backgroud: var(--primary-dark)
 
 }
 
@@ -515,5 +515,89 @@ LOADING
         transform:rotate(360deg);
 
     }
+
+}
+
+/* ==========================
+   MODAL DA CÂMERA
+========================== */
+
+.camera-modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.90);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:99999;
+
+}
+
+.camera-container{
+
+    width:95%;
+
+    max-width:700px;
+
+    background:#111;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+}
+
+.camera-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:15px;
+
+    color:#fff;
+
+}
+
+.camera-close{
+
+    background:none;
+
+    border:none;
+
+    color:white;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+}
+
+#cameraVideo{
+
+    width:100%;
+
+    display:block;
+
+    background:black;
+
+}
+
+.camera-footer{
+
+    padding:20px;
+
+    display:flex;
+
+    justify-content:center;
 
 }
