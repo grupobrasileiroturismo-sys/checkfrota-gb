@@ -566,6 +566,16 @@ LOADING
 
 }
 
+.camera-preview{
+
+    flex:1;
+
+    overflow:hidden;
+
+    background:#000;
+
+}
+
 #cameraVideo{
 
     width:100%;
