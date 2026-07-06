@@ -13,7 +13,8 @@ const CHECKLIST = {
 
         "CRLV",
         "Certificado de Vistoria",
-        "Documento ANTT",
+        "Apólice de Seguro",
+        "Documentação ANTT",
         "Cronotacógrafo"
 
     ],
