@@ -170,4 +170,4 @@ window.addEventListener("beforeunload",()=>{
 
     fecharCamera(false);
 
-})
+});
