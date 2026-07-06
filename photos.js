@@ -425,24 +425,14 @@ async function salvarFotoCamera(id, blob){
 
     try{
 
-        // libera a imagem anterior
-        imagens[id] = null;
+        imagens[id] = blob;
 
-        // comprime
-        const blobComprimido = await comprimirImagem(blob);
-
-        imagens[id] = blobComprimido;
-
-        const tamanho = (blobComprimido.size/1024).toFixed(0);
+        const tamanho = (blob.size / 1024).toFixed(0);
 
         document.getElementById(`photoInfo-${id}`).innerHTML = `
-
             <strong>${id}.jpg</strong>
-
             <br>
-
             ${tamanho} KB
-
         `;
 
     }
@@ -451,7 +441,7 @@ async function salvarFotoCamera(id, blob){
 
         console.error(e);
 
-        alert("Erro ao processar a foto.");
+        alert("Erro ao salvar a foto.");
 
     }
 

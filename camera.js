@@ -120,7 +120,7 @@ async function capturarFoto(){
 
         const blob = await new Promise(resolve=>{
 
-            canvas.toBlob(resolve,"image/jpeg",0.90);
+            canvas.toBlob(resolve,"image/jpeg",0.55);
 
         });
 
