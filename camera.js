@@ -120,13 +120,17 @@ async function capturarFoto(){
 
         const blob = await new Promise(resolve=>{
 
-            canvas.toBlob(resolve,"image/jpeg",0.9);
+            canvas.toBlob(resolve,"image/jpeg",0.90);
 
         });
 
-        console.log("Foto capturada!");
+        // limpa memória imediatamente
+        ctx.clearRect(0,0,canvas.width,canvas.height);
 
-        console.log(blob);
+        canvas.width = 1;
+        canvas.height = 1;
+
+        await salvarFotoCamera(fotoAtual,blob);
 
         fecharCamera();
 
@@ -135,6 +139,8 @@ async function capturarFoto(){
     catch(e){
 
         console.error(e);
+
+        alert("Erro ao capturar foto.");
 
     }
 

@@ -416,3 +416,43 @@ function obterBlobs(){
     return imagens;
 
 }
+
+// =============================================
+// RECEBE FOTO DA CÂMERA
+// =============================================
+
+async function salvarFotoCamera(id, blob){
+
+    try{
+
+        // libera a imagem anterior
+        imagens[id] = null;
+
+        // comprime
+        const blobComprimido = await comprimirImagem(blob);
+
+        imagens[id] = blobComprimido;
+
+        const tamanho = (blobComprimido.size/1024).toFixed(0);
+
+        document.getElementById(`photoInfo-${id}`).innerHTML = `
+
+            <strong>${id}.jpg</strong>
+
+            <br>
+
+            ${tamanho} KB
+
+        `;
+
+    }
+
+    catch(e){
+
+        console.error(e);
+
+        alert("Erro ao processar a foto.");
+
+    }
+
+}
