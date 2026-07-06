@@ -142,9 +142,7 @@ function configurarInput(id){
 
 function abrirCamera(id){
 
-    document
-        .getElementById(`input-${id}`)
-        .click();
+    abrirCameraCustom(id);
 
 }
 
@@ -154,7 +152,7 @@ function abrirCamera(id){
 
 function trocarFoto(id){
 
-    abrirCamera(id);
+    abrirCameraCustom(id);
 
 }
 
