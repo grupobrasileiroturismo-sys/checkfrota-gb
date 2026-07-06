@@ -118,34 +118,15 @@ async function capturarFoto(){
 
         ctx.drawImage(video,0,0);
 
-        const blobOriginal = await new Promise(resolve=>{
+        const blob = await new Promise(resolve=>{
 
-            canvas.toBlob(resolve,"image/jpeg",1);
+            canvas.toBlob(resolve,"image/jpeg",0.9);
 
         });
 
-        // reutiliza nossa compressão
-        const blobComprimido = await comprimirImagem(blobOriginal);
+        console.log("Foto capturada!");
 
-        imagens[fotoAtual] = blobComprimido;
-
-        const tamanho = (blobComprimido.size/1024).toFixed(0);
-
-        document.getElementById(`photoInfo-${fotoAtual}`).innerHTML = `
-
-            <strong>${fotoAtual}.jpg</strong>
-
-            <br>
-
-            ${tamanho} KB
-
-        `;
-
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-
-        canvas.width = 1;
-
-        canvas.height = 1;
+        console.log(blob);
 
         fecharCamera();
 
@@ -154,8 +135,6 @@ async function capturarFoto(){
     catch(e){
 
         console.error(e);
-
-        alert("Erro ao capturar foto.");
 
     }
 
