@@ -524,80 +524,83 @@ LOADING
 
 .camera-modal{
 
-    position:fixed;
+    position: fixed;
+    inset: 0;
 
-    inset:0;
+    background: rgba(0,0,0,.92);
 
-    background:rgba(0,0,0,.90);
+    display: none;
 
-    display:none;
+    justify-content: center;
+    align-items: center;
 
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:99999;
+    z-index: 99999;
 
 }
 
 .camera-container{
 
-    width:95%;
+    width: 100%;
+    height: 100%;
 
-    max-width:700px;
+    display: flex;
+    flex-direction: column;
 
-    background:#111;
-
-    border-radius:18px;
-
-    overflow:hidden;
+    background: #111;
 
 }
 
 .camera-header{
 
-    display:flex;
+    height: 70px;
 
-    justify-content:space-between;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    align-items:center;
+    padding: 0 20px;
 
-    padding:15px;
+    color: white;
 
-    color:#fff;
-
-}
-
-.camera-close{
-
-    background:none;
-
-    border:none;
-
-    color:white;
-
-    font-size:28px;
-
-    cursor:pointer;
+    flex-shrink: 0;
 
 }
 
 #cameraVideo{
 
-    width:100%;
+    flex: 1;
 
-    display:block;
+    width: 100%;
 
-    background:black;
+    object-fit: contain;
+
+    background: black;
 
 }
 
 .camera-footer{
 
-    padding:20px;
+    height: 90px;
 
-    display:flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    justify-content:center;
+    gap: 20px;
+
+    flex-shrink: 0;
+
+}
+
+.camera-close{
+
+    background: transparent;
+    border: none;
+
+    color: white;
+
+    font-size: 30px;
+
+    cursor: pointer;
 
 }
