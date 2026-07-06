@@ -106,17 +106,22 @@ async function capturarFoto(){
 
     try{
 
+        console.log("1 - Entrou em capturarFoto");
+
         const video = document.getElementById("cameraVideo");
 
         const canvas = document.createElement("canvas");
 
         canvas.width = video.videoWidth;
-
         canvas.height = video.videoHeight;
+
+        console.log("2 - Canvas criado");
 
         const ctx = canvas.getContext("2d");
 
         ctx.drawImage(video,0,0);
+
+        console.log("3 - Imagem desenhada");
 
         const blob = await new Promise(resolve=>{
 
@@ -124,23 +129,28 @@ async function capturarFoto(){
 
         });
 
-        // limpa memória imediatamente
+        console.log("4 - Blob criado", blob);
+
         ctx.clearRect(0,0,canvas.width,canvas.height);
 
         canvas.width = 1;
         canvas.height = 1;
 
+        console.log("5 - Chamando salvarFotoCamera");
+
         await salvarFotoCamera(fotoAtual,blob);
 
+        console.log("6 - Foto salva");
+
         fecharCamera();
+
+        console.log("7 - Modal fechado");
 
     }
 
     catch(e){
 
         console.error(e);
-
-        alert("Erro ao capturar foto.");
 
     }
 

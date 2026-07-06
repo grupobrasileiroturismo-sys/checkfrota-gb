@@ -425,6 +425,8 @@ async function salvarFotoCamera(id, blob){
 
     try{
 
+        console.log("Entrou em salvarFotoCamera", id, blob);
+
         imagens[id] = blob;
 
         const tamanho = (blob.size / 1024).toFixed(0);
